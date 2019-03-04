@@ -10,10 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_120839) do
+ActiveRecord::Schema.define(version: 2019_03_04_123513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "creative_excuses", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "photo"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_creative_excuses_on_user_id"
+  end
+
+  create_table "location_excuses", force: :cascade do |t|
+    t.string "start_point"
+    t.string "end_point"
+    t.string "lines_disrupted"
+    t.string "disruption_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "saved_excuses", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "message"
+    t.integer "rating"
+    t.string "excuse_type"
+    t.bigint "excuse_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["excuse_type", "excuse_id"], name: "index_saved_excuses_on_excuse_type_and_excuse_id"
+    t.index ["user_id"], name: "index_saved_excuses_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +58,6 @@ ActiveRecord::Schema.define(version: 2019_03_04_120839) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "creative_excuses", "users"
+  add_foreign_key "saved_excuses", "users"
 end
