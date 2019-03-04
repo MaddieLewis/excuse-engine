@@ -1,5 +1,10 @@
 class CreativeExcusesController < ApplicationController
   before_action :set_creative_excuse, only: %i[show edit update]
+
+  def index
+
+  end
+
   def show
   end
 
@@ -29,6 +34,8 @@ class CreativeExcusesController < ApplicationController
   end
 
   private
+
+
 
   def creative_excuse_params
     params.require(:creative_excuse).permit(:title, :description, :photo)
