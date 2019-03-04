@@ -1,2 +1,3 @@
 class LocationExcusesController < ApplicationController
+
 end
