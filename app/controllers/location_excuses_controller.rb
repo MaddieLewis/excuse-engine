@@ -11,10 +11,6 @@ class LocationExcusesController < ApplicationController
   end
 
   def show
-    # @markers = {
-    #   lat: 51.5,
-    #   lng: -0.13
-    # }
   end
 
   private
