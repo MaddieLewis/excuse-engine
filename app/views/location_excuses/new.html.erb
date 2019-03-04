@@ -1,1 +1,7 @@
 <h1>new, location excuses</h1>
+
+<%= simple_form_for @location_excuse, url: location_excuse_path do |f| %>
+  <%= f.input :start_point %>
+  <%= f.input :end_point %>
+  <%= f.button, "submit", class: "btn" %>
+<% end %>
