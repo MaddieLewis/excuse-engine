@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   resources :creative_excuses, only: [:show, :new, :create, :edit, :update]
   resources :location_excuses, only: [:show, :new, :create]
   resources :saved_excuses, except: [:index, :new, :create, :destroy]
+  resources :users, only: :show
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
