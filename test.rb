@@ -10,7 +10,6 @@ response = HTTP.get("https://api-radon.tfl.gov.uk/Journey/JourneyResults/#{start
 
 parsed = JSON.parse(response)
 
-disrupted_journeys = []
 parsed["lines"].each do |line|
   line["lineStatuses"].each do |line_status|
     p "The #{line_status["lineId"]} line has #{line_status["statusSeverityDescription"].downcase}"
