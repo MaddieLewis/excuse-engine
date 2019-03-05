@@ -5,7 +5,7 @@
   font-weight: bold;
   background: #6AD58B;
   transition: background 0.3s ease;
-  &.btn-intro {
+  &.btn-wide {
     width: 100%;
   }
 }
@@ -16,6 +16,9 @@
   color: white;
 }
 
-.btn-group {
-  margin-top: 16px;
+.btns-parent-center {
+  height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
