@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_124104) do
+ActiveRecord::Schema.define(version: 2019_03_04_191946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 2019_03_04_124104) do
   create_table "location_excuses", force: :cascade do |t|
     t.string "start_point"
     t.string "end_point"
-    t.string "lines_disrupted"
-    t.string "disruption_message"
+    t.string "lines_disrupted", array: true
+    t.string "disruption_message", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
