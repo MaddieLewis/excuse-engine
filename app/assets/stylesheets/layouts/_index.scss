@@ -3,3 +3,12 @@
 // @import "dashboard";
 // @import "profile";
 // @import "map";
+
+body {
+  h1, h2, h3 {
+    font-weight: 900;
+  }
+  p, a {
+    font-weight: 500;
+  }
+}
