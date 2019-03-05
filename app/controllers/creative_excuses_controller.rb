@@ -5,7 +5,6 @@ class CreativeExcusesController < ApplicationController
   end
 
   def show
-    raise
     session[:seen_ids] ||= []
     creative_excuses = SavedExcuse.where(excuse_type: "CreativeExcuse")
     session[:seen_ids] = [] if session[:seen_ids].count == creative_excuses.count

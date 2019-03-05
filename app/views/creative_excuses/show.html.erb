@@ -1,7 +1,6 @@
 <h1>Show, creative excuses</h1>
-<%= @random_array.count %>
 <%= @creative_excuse.excuse.title %>
+<%= @creative_excuse.excuse.description %>
 
-<div style="background-image: url(<%= @creative_excuse.excuse.photo %>); background-position: center; height:300px; width: 400px"></div>
 
 <%= link_to "give me something else", creative_excuse_path(@creative_excuse), class: "btn btn-intro mt-3" %>
