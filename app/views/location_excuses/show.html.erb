@@ -1,4 +1,13 @@
 <h1>show location excuses</h1>
+<% if !@location_excuse.lines_disrupted.empty? %>
+<h2> The <%= @location_excuse.lines_disrupted.first %> line is disrupted</h2>
+<p><%= @location_excuse.disruption_message %></p>
+<p><%= @all_journeys %></p>
+<p><%= @bus %></p>
+<p><%= @combined %></p>
+<% else %>
+<h2>There are no disruptions along your route</h2>
+<% end %>
 <div
   id="map"
   style="width: 100%;
