@@ -1,5 +1,5 @@
 class LocationExcusesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[new show]
+  skip_before_action :authenticate_user!, only: %i[new show create]
   before_action :set_location_excuse, only: :show
 
   TFL_APP_ID = "abc3208f"
