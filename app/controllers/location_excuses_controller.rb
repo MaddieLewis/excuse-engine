@@ -79,11 +79,12 @@ class LocationExcusesController < ApplicationController
               arr << "leg #{leg_index + 1}: #{leg["instruction"]["summary"]}"
             else
               arr << "leg #{leg_index + 1}: #{leg["instruction"]["summary"]}, disruption: #{disruption["description"]}"
+              arr.uniq
             end
           end
         end
-        all << arr.uniq
       end
+      all << arr.uniq
     end
     return all
   end
