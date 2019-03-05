@@ -1,5 +1,10 @@
-<div class="container">
-  <h1>Show, creative excuses</h1>
 
-  <%= @creative_excuse.title %>
+<div class="container">                                    
+  <h1>Show, creative excuses</h1>
+  <%= @creative_excuse.excuse.title %>
+  <%= @creative_excuse.excuse.description %>
+
+  <%= link_to "give me something else", creative_excuse_path(@creative_excuse), class: "btn btn-intro mt-3" %>
 </div>
+
+
