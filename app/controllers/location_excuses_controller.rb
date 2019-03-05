@@ -11,80 +11,95 @@ class LocationExcusesController < ApplicationController
 
   def create
     @location_excuse = LocationExcuse.new(location_excuse_params)
-    @location_excuse.lines_disrupted = []
-    @location_excuse.disruption_message = []
-    find_excuses('')
-    find_excuses('bus')
-    find_excuses('bus,tube')
-    if @location_excuse.save
+    all = find_excuses('') + find_excuses('bus') + find_excuses('bus,tube')
+    all_excuses = all.uniq.map { |excuse| new_loop(excuse) }
+
+    unless all_excuses.empty?
+      all_excuses.map do |excuse|
+        unless excuse&.lines_disrupted.nil? || excuse&.disruption_message.nil?
+          unless excuse.save
+            render :new
+          end
+        end
+      end
+    end
+
+    if !all_excuses.first.nil?
+      @location_excuse = all_excuses.first
       redirect_to location_excuse_path(@location_excuse)
     else
       render :new
     end
   end
 
-
   def show
-    @all_journeys = find_journeys('')
-    @bus = find_journeys('bus')
-    @combined = find_journeys('bus,tube')
-    @location_excuse.lines_disrupted.uniq
-    @location_excuse.disruption_message.uniq
   end
 
   private
 
   def location_excuse_params
-    params.require(:location_excuse).permit(:start_point, :end_point, :time)
+    params.require(:location_excuse).permit(:start_point, :end_point)
   end
 
   def set_location_excuse
     @location_excuse = LocationExcuse.find(params[:id])
   end
 
-  def find_excuses(mode)
+  def api_call(mode)
     start = @location_excuse.start_point.gsub(/ /, "%20")
     end_pt = @location_excuse.end_point.gsub(/ /, "%20")
-
     response = HTTP.get("https://api-radon.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?&mode=#{mode}&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}")
+    JSON.parse(response)
+  end
 
-    parsed = JSON.parse(response)
-
+  def find_excuses(mode)
+    parsed = api_call(mode)
+    arr = []
     parsed["lines"].each do |line|
       line["lineStatuses"].each do |line_status|
+        hash = {}
         if !line_status["lineId"].nil?
-          @location_excuse.lines_disrupted << line_status["lineId"]
-          @location_excuse.disruption_message << line_status["reason"]
+          hash["line"] = line_status["lineId"]
+          hash["message"] = line_status["reason"]
+          journeys = find_journeys(mode)
+          unless journeys.nil? || journeys.empty?
+            journeys.each { |journey| hash["journey"] = journey if journey.join.include?(/%#{line_status["lineId"]}%/) }
+          end
         end
+        arr << hash
       end
     end
+    arr.uniq
   end
 
   def find_journeys(mode)
-    start = @location_excuse.start_point.gsub(/ /, "%20")
-    end_pt = @location_excuse.end_point.gsub(/ /, "%20")
-
-    response = HTTP.get("https://api-radon.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?&mode=#{mode}&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}")
-    all = []
-    parsed = JSON.parse(response)
+    parsed = api_call(mode)
+    arr = []
     parsed["journeys"].each_with_index do |journey, index|
-      arr = []
-      arr << "Journey #{index + 1}, Travel Time: #{journey["duration"]} minutes"
-      journey["legs"].each_with_index do |leg, leg_index|
+      journ = ["Journey #{index + 1}"]
+      journ << "#{journey["duration"]}"
+      journey["legs"].each_with_index do |leg, index|
         if leg["disruptions"].empty?
-          arr << "leg #{leg_index + 1}: #{leg["instruction"]["summary"]}"
+          journ << "leg #{index + 1}: #{leg["instruction"]["summary"]}"
         else
           leg["disruptions"].each do |disruption|
-            if disruption["category"] == "PlannedWork"
-              arr << "leg #{leg_index + 1}: #{leg["instruction"]["summary"]}"
+            if disruption["category"] == "PlannedWork" then journ << "leg #{index + 1}: #{leg["instruction"]["summary"]}"
             else
-              arr << "leg #{leg_index + 1}: #{leg["instruction"]["summary"]}, disruption: #{disruption["description"]}"
+              journ << "leg #{index + 1}: #{leg["instruction"]["summary"]}, disruption: #{disruption["description"]}"
             end
           end
         end
-        all << arr.uniq
       end
+      arr << journ if journ.join.include?("disruption:")
     end
-    return all
+    arr.uniq
+  end
+
+  def new_loop(excuse)
+    start = @location_excuse.start_point
+    end_pt = @location_excuse.end_point
+    unless excuse.nil? || excuse.empty?
+      LocationExcuse.new(start_point: start, end_point: end_pt, lines_disrupted: [excuse["line"]], disruption_message: [excuse["message"]], journeys: [excuse["journey"]])
+    end
   end
 end
