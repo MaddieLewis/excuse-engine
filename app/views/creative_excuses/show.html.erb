@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="data" data-signed=<%= user_signed_in? %>>
   <h1>Show, creative excuses</h1>
   <%= @creative_excuse.title %>
   <%= @creative_excuse.description %>
@@ -7,10 +7,12 @@
 
   <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
       <div class="form-actions">
-        <%= f.button :submit, "Save Excuse!"%>
+        <%= f.button :submit, "Save Excuse!", id: 'clickme'%>
       </div>
   <% end %>
-
+  <div class="btn mt" id="fakebtn">
+    Save excuse
+  </div>
 </div>
 
 
