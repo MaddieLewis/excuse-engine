@@ -42,3 +42,4 @@ class SavedExcusesController < ApplicationController
     end
   end
 end
+

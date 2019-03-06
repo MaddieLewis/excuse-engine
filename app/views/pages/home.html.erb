@@ -1,9 +1,14 @@
-<div class="container parent-center">
-  <div class="width-100">
+<div class="parent-center">
+    <%= image_tag "logo.png", alt: "EE logo", class: "logo" %>
+  <div class="title">
+    <h3>THE</h3>
     <h1>EXCUSE</h1>
     <h3 class="mb-5">ENGINE</h3>
-    <%= link_to "location based excuse", new_location_excuse_path, class: "btn btn-wide"%>
-    <%= link_to "give me something creative", creative_excuse_path(@creative_excuse), class: "btn btn-wide mt-3" %>
   </div>
-</div>
+  <div class="excuse-button">
+    <%= link_to "FIND AN EXCUSE", new_location_excuse_path, class: "btn"%>
+  </div>
+  <p>Or...</p>
+  <p><%= link_to "Find a creative excuse", creative_excuse_path(@creative_excuse)%></p>
 
+</div>

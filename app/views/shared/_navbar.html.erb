@@ -1,11 +1,11 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "" %>
+    <%= image_tag "logo.png" %>
    <!--  <span id="logo-text">EXCUSE ENGINE</span> -->
   <% end %>
 
   <% unless current_user %>
-    <%= link_to "Login", new_user_session_path, class: "btn btn-link" %>
+    <%= link_to "Login", new_user_session_path, class: "" %>
 
   <% else %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
