@@ -1,3 +1,5 @@
+<%= render "layouts/sign_in" %>
+<%= render "layouts/sign_up" %>
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "logo.png" %>
@@ -5,7 +7,10 @@
   <% end %>
 
   <% unless current_user %>
+
     <%= link_to "Login", new_user_session_path, class: "" %>
+    <%= link_to "Login", new_user_session_path, class: "btn btn-link" %>
+    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-link" %>
 
   <% else %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

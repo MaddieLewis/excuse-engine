@@ -1,5 +1,13 @@
 <div class="container">
   <div class="width-100">
     <h1>users show page</h1>
+    <h2>Saved Creative Excuses</h2>
+    <% @user.saved_excuses.each do |saved_excuse|  %>
+      <% if saved_excuse.excuse_type == "CreativeExcuse" %>
+        <p><%= saved_excuse.excuse.title %></p>
+      <% else %>
+        <p><%= "Say something different" %></p>
+      <% end %>
+    <% end %>
   </div>
 </div>

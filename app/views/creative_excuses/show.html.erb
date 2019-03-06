@@ -1,10 +1,16 @@
-
-<div class="container">                                    
+<div class="container">
   <h1>Show, creative excuses</h1>
-  <%= @creative_excuse.excuse.title %>
-  <%= @creative_excuse.excuse.description %>
+  <%= @creative_excuse.title %>
+  <%= @creative_excuse.description %>
 
   <%= link_to "give me something else", creative_excuse_path(@creative_excuse), class: "btn btn-intro mt-3" %>
+
+  <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
+      <div class="form-actions">
+        <%= f.button :submit, "Save Excuse!"%>
+      </div>
+  <% end %>
+
 </div>
 
 

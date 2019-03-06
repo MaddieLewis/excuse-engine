@@ -1,15 +1,24 @@
 import mapboxgl from 'mapbox-gl';
 
+let coordinates = document.getElementById('coordinates').innerHTML;
+coordinates = JSON.parse(coordinates);
+// console.log(coordinates);
+
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
+  const fitMapToLine = (map, lineCoords) => {
+    const bounds = new mapboxgl.LngLatBounds();
+    lineCoords.forEach(coords => bounds.extend([coords[0], coords[1]]));
+    map.fitBounds(bounds, { padding: 70, maxZoom: 15 });
+  }
 
   if (mapElement) { // only build a map if there's a div#map to inject into
     mapboxgl.accessToken = mapElement.dataset.mapboxapikey;
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/madz/cjsx5f2m92iu31frv61mfq1ih',
-      center: [-122.486052, 37.830348],
-      zoom: 14
+      center: [-0.07711901911, 51.53263963289],
+      zoom: 10
     });
 
     map.on('load', function () {
@@ -23,12 +32,7 @@ const initMapbox = () => {
             "properties": {},
             "geometry": {
               "type": "LineString",
-              "coordinates": [
-                [-122.48369693756104, 37.83381888486939],
-                [-122.48348236083984, 37.83317489144141],
-                [-122.48339653015138, 37.83270036637107],
-                [-122.48356819152832, 37.832056363179625]
-              ]
+              "coordinates": coordinates
             }
           }
         },
@@ -38,10 +42,12 @@ const initMapbox = () => {
         },
         "paint": {
           "line-color": "#9CF0F5",
-          "line-width": 6
+          "line-width": 5,
+          "line-opacity": .8
         }
       });
     });
+    fitMapToLine(map, coordinates);
   }
 };
 

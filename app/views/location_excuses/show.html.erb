@@ -3,7 +3,18 @@
     <h1>The <%= @location_excuse.lines_disrupted %> line is disrupted</h1>
     <p><%= @location_excuse.disruption_message %></p>
     <p><%= @location_excuse.journeys %></p>
-    <p><%= @location_excuse.journey_route %></p>
+    <% @coordinates = [] %>
+    <% @location_excuse.journey_route.each do |leg|%>
+      <% leg = JSON.parse(leg) %>
+      <%#= leg.class %>
+
+      <% leg.each do |coords| %>
+        <% @coordinates << [coords[1], coords[0]] %>
+      <% end %>
+    <% end %>
+    <div id="coordinates" style="display: none;" >
+      <%= @coordinates %>
+    </div>
 
     <%= link_to "next excuse", location_excuse_path(@location_excuse.id + 1) %>
     <%= link_to "home", root_path %>
