@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_154056) do
+ActiveRecord::Schema.define(version: 2019_03_06_125522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,12 @@ ActiveRecord::Schema.define(version: 2019_03_05_154056) do
   create_table "location_excuses", force: :cascade do |t|
     t.string "start_point"
     t.string "end_point"
-    t.string "lines_disrupted", array: true
-    t.string "disruption_message", array: true
+    t.string "lines_disrupted"
+    t.string "disruption_message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "journeys", array: true
+    t.string "journey_route", array: true
   end
 
   create_table "saved_excuses", force: :cascade do |t|

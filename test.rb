@@ -34,21 +34,42 @@ def find_all_journeys
   end
 # bus_parsed = JSON.parse(bus)
 # tube_bus_parsed = JSON.parse(tube_bus)
-arr = []
-
-PARSED["lines"].each do |line|
-  line["lineStatuses"].each do |line_status|
-    hash = {}
-    if !line_status["lineId"].nil?
-      hash["line"] = line_status["lineId"]
-      hash["message"] = line_status["reason"]
-      all_journeys = find_all_journeys
-      all_journeys.each { |journey| hash["journey"] = journey if journey.join.downcase.include?(line_status["lineId"]) }
-    end
-    arr << hash
+path = []
+this_journey = PARSED["journeys"]
+this_journey.each do |journey|
+  journey["legs"].each do |leg|
+    path << leg["path"]["lineString"]
   end
 end
-p arr.uniq
+p path
+# PARSED["lines"].each do |line|
+#   line["lineStatuses"].each do |line_status|
+#     hash = {}
+#     if !line_status["lineId"].nil?
+#       hash["line"] = line_status["lineId"]
+#       hash["message"] = line_status["reason"]
+#       all_journeys = find_all_journeys
+#       all_journeys.each do |journey|
+#         if journey.join.downcase.include?(line_status["lineId"])
+#           hash["journey"] = journey
+#           hash["journey route"] = find_journey_route(mode, journey)
+#         end
+#       end
+#     end
+#     arr << hash
+#   end
+# end
+# p arr.uniq
+
+#   def find_journey_route(mode, journey)
+#     path = []
+#     this_journey = PARSED["journeys"].select { |journ| journ == journey }
+#     this_journey.each do |leg|
+#       path << leg["path"]["lineString"]
+#     end
+#     p path
+#     path
+#   end
 
 # p "TUBE JOURNEY"
 # p "LINE DISRUPTIONS"

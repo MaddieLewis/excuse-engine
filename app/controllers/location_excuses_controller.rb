@@ -65,6 +65,7 @@ class LocationExcusesController < ApplicationController
           all_journeys.detect do |journey|
             journey.join.downcase.include?(line_status["lineId"])
             hash["journey"] = journey
+            hash["journey route"] = find_journey_route(mode, journey)
           end
         end
         arr << hash
@@ -73,27 +74,18 @@ class LocationExcusesController < ApplicationController
     arr.uniq
   end
 
-  def find_journeys(mode)
+  def find_journey_route(mode, journey)
     parsed = api_call(mode)
-    arr = []
-    parsed["journeys"].each_with_index do |journey, index|
-      journ = ["Journey #{index + 1}"]
-      journ << "#{journey["duration"]}"
-      journey["legs"].each_with_index do |leg, index|
-        if leg["disruptions"].empty?
-          journ << "leg #{index + 1}: #{leg["instruction"]["summary"]}"
-        else
-          leg["disruptions"].each do |disruption|
-            if disruption["category"] == "PlannedWork" then journ << "leg #{index + 1}: #{leg["instruction"]["summary"]}"
-            else
-              journ << "leg #{index + 1}: #{leg["instruction"]["summary"]}, disruption: #{disruption["description"]}"
-            end
-          end
+    journeys = parsed["journeys"]
+    path = []
+    journeys.each_with_index do |journ, index|
+      if index == journey.first.last.to_i - 1
+        journ["legs"].each do |leg|
+          path << leg["path"]["lineString"]
         end
       end
-      arr << journ if journ.join.include?("disruption:")
     end
-    arr.uniq
+    path
   end
 
   def find_all_journeys(mode)
@@ -123,7 +115,7 @@ class LocationExcusesController < ApplicationController
     start = @location_excuse.start_point
     end_pt = @location_excuse.end_point
     unless excuse.nil? || excuse.empty?
-      LocationExcuse.new(start_point: start, end_point: end_pt, lines_disrupted: [excuse["line"]], disruption_message: [excuse["message"]], journeys: excuse["journey"])
+      LocationExcuse.new(start_point: start, end_point: end_pt, lines_disrupted: excuse["line"], disruption_message: excuse["message"], journeys: excuse["journey"], journey_route: excuse["journey route"])
     end
   end
 end
