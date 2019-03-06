@@ -34,12 +34,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_190655) do
     t.datetime "updated_at", null: false
     t.string "journeys", array: true
     t.string "journey_route", array: true
-    t.float "latitude"
-    t.float "longitude"
-    t.float "start_latitude"
-    t.float "start_longitude"
-    t.float "end_latitude"
-    t.float "end_longitude"
   end
 
   create_table "saved_excuses", force: :cascade do |t|
