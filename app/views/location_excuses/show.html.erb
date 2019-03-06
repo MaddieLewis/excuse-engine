@@ -1,8 +1,9 @@
 <div class="container parent-center">
   <div class="width-100">
-    <h1>The <%= @location_excuse&.lines_disrupted.first %> line is disrupted</h1>
-    <p><%= @location_excuse&.disruption_message.first %></p>
+    <h1>The <%= @location_excuse.lines_disrupted %> line is disrupted</h1>
+    <p><%= @location_excuse.disruption_message %></p>
     <p><%= @location_excuse.journeys %></p>
+    <p><%= @location_excuse.journey_route %></p>
 
     <%= link_to "next excuse", location_excuse_path(@location_excuse.id + 1) %>
     <%= link_to "home", root_path %>
