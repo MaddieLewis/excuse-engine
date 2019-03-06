@@ -3,7 +3,9 @@
   padding: 10px 15px;
   border-radius: 4px;
   font-weight: 500;
-  background: #6AD58B;
+  font-size: 21px;
+  text-align: center;
+  background: $yellow;
   transition: background 0.3s ease;
   &.btn-wide {
     width: 100%;
@@ -15,9 +17,11 @@
 }
 .btn:hover {
   opacity: 1;
-  background: #3ac162;
+  background: $darkyellow;
   text-decoration: none;
   color: white;
 }
 
 
+
+// color: #FFFFFF;
