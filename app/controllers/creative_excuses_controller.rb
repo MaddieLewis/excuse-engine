@@ -1,4 +1,5 @@
 class CreativeExcusesController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[show]
   before_action :set_creative_excuse, only: %i[edit update]
 
   def index
