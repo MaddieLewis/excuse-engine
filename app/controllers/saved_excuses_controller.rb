@@ -10,13 +10,12 @@ class SavedExcusesController < ApplicationController
   end
 
   def create
-    @saved_excuse = SavedExcuse.new(saved_excuse_params)
-    find_excuse
-    @saved_excuse.user = current_user
-    if @saved_excuse.save
-      redirect_to user_path(current_user)
+    cu = CreativeExcuse.find(params[:creative_excuse_id].to_i)
+    se = SavedExcuse.new(excuse: cu, user: current_user)
+    if se.save
+      redirect_to creative_excuse_path(cu)
     else
-      render :new
+      puts "SOMETHING WENT WRONG"
     end
   end
 

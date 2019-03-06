@@ -1,30 +1,20 @@
 class CreativeExcusesController < ApplicationController
   before_action :set_creative_excuse, only: %i[edit update]
-
-  def index
-  end
+  skip_before_action :authenticate_user!, only: %i[show]
 
   def show
     session[:seen_ids] ||= []
-    creative_excuses = SavedExcuse.where(excuse_type: "CreativeExcuse")
+    creative_excuses = CreativeExcuse.all
     session[:seen_ids] = [] if session[:seen_ids].count == creative_excuses.count
+    @saved_excuse = SavedExcuse.new()
     if params[:id].class == Integer
-      @creative_excuse = SavedExcuse.find(params[:id])
+      @creative_excuse = CreativeExcuse.find(params[:id])
     else
       @creative_excuse = random_selection
     end
   end
 
-  def random_selection
-    @random_array = SavedExcuse.where.not(id: session[:seen_ids]).where(excuse_type: "CreativeExcuse").all.to_a
-    randomise_array
-  end
-
-  def randomise_array
-    @selection = @random_array.sample
-    session[:seen_ids] << @selection.id
-    @random_array.delete(@selection)
-    # above line returns @selection
+  def save
   end
 
 
@@ -55,7 +45,17 @@ class CreativeExcusesController < ApplicationController
 
   private
 
+  def random_selection
+    @random_array = CreativeExcuse.where.not(id: session[:seen_ids]).to_a
+    randomise_array
+  end
 
+  def randomise_array
+    @selection = @random_array.sample
+    session[:seen_ids] << @selection.id
+    @random_array.delete(@selection)
+    # above line returns @selection
+  end
 
   def creative_excuse_params
     params.require(:creative_excuse).permit(:title, :description, :photo)
