@@ -6,14 +6,13 @@ class CreativeExcusesController < ApplicationController
     session[:seen_ids] ||= []
     creative_excuses = CreativeExcuse.all
     session[:seen_ids] = [] if session[:seen_ids].count == creative_excuses.count
-    @saved_excuse = SavedExcuse.new()
+    @saved_excuse = SavedExcuse.new
     @creative_excuse = CreativeExcuse.find(params[:id])
-    @random_excuse= random_selection
+    @random_excuse = random_selection
   end
 
   def save
   end
-
 
   def new
     @creative_excuse = CreativeExcuse.new
