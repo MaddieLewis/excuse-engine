@@ -6,7 +6,6 @@
     <% @coordinates = [] %>
     <% @location_excuse.journey_route.each do |leg|%>
       <% leg = JSON.parse(leg) %>
-      <%#= leg.class %>
 
       <% leg.each do |coords| %>
         <% @coordinates << [coords[1], coords[0]] %>
