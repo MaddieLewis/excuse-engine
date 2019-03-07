@@ -1,19 +1,24 @@
 <div class="container" id="data" data-signed=<%= user_signed_in? %>>
-  <h1>Show, creative excuses</h1>
-  <%= @creative_excuse.title %>
-  <%= @creative_excuse.description %>
-
-  <%= link_to "give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-3" %>
-
-  <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
-      <div class="form-actions">
-        <%= f.button :submit, "Save Excuse!", id: 'clickme'%>
-
+  <div class="parent-center">
+    <h1>Excuse Found!</h1>
+    <p>Reported on  <%=  @creative_excuse.time_format%></p>
+    <%= @creative_excuse.icon %>
+    <br>
+    <p> <%= @creative_excuse.title %></p>
+    <p><%= @creative_excuse.description %><p>
+    <div class="width-100">
+      <%= link_to "give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-3 width-100"  %>
+      <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
+        <div class="form-actions">
+          <%= f.button :submit, "Save Excuse!", id: 'clickme'%>
+        </div>
+      <% end %>
+      <div class="btn mt width-100" id="fakebtn">
+      Save excuse
       </div>
-  <% end %>
-  <div class="btn mt" id="fakebtn">
-    Save excuse
+    </div>
   </div>
 </div>
+
 
 
