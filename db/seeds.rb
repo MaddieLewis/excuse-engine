@@ -30,6 +30,7 @@ excuse14 = CreativeExcuse.create!(user: user4, title: 'Wolves', description: "I 
 excuse15 = CreativeExcuse.create!(user: user1, title: 'Azkaban', description: "I had to escape Azkaban first", category: "funny" )
 excuse16 = CreativeExcuse.create!(user: user2, title: 'Rick Astley', description: "I was given up and let down by Mr Astley", category: "funny" )
 excuse17 = CreativeExcuse.create!(user: user2, title: 'Parade Issues', description: "I got caught in a parade", category: "funny" )
+
 # SavedExcuse.create!(user: user2, excuse: excuse1, message: "How funny is this!", rating: 5)
 # SavedExcuse.create!(user: user1, excuse: excuse2, message: "My Daily commute", rating: 5)
 # SavedExcuse.create!(user: user1, excuse: excuse3, message: "My Daily commute", rating: 5)

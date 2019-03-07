@@ -5,7 +5,9 @@
     <p><%= @location_excuse.journeys %></p>
     <% @coordinates = [] %>
     <% @location_excuse.journey_route.each do |leg|%>
+    <% unless leg.class == Array %>
       <% leg = JSON.parse(leg) %>
+    <% end %>
 
       <% leg.each do |coords| %>
         <% @coordinates << [coords[1], coords[0]] %>
@@ -19,6 +21,7 @@
     <% else %>
     <%= link_to "next excuse", pages_no_excuse_path, class: "btn" %>
     <%= link_to "home", root_path %>
+    <% end %>
     <div
       id="map"
       style="width: 100%;

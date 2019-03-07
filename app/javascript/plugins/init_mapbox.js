@@ -4,7 +4,6 @@ let coordinates = document.getElementById('coordinates');
 if (coordinates) {
   coordinates = JSON.parse(coordinates.innerHTML);
 }
-// console.log(coordinates);
 
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
