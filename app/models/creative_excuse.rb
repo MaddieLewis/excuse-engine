@@ -4,4 +4,8 @@ class CreativeExcuse < ApplicationRecord
   validates :title, :description, :category, presence: true
   validates :category, inclusion: { in: %w(malfunction pets health family funny other) }
   mount_uploader :photo, PhotoUploader
+
+ def time_format
+   self.created_at.strftime("%B %d, %Y")
+ end
 end
