@@ -34,5 +34,15 @@
         <% end %>
       <% end %>
     </div>
+
+    <div class="border-top border-secondary  mt-100 mb-5">
+      <h6 class="mt-100 mb-3">Created Excuses</h6>
+      <% @user.creative_excuses.each do |created_excuse|  %>
+          <div class="d-flex justify-content-center"">
+            <p style="color: #FFBA34" class="mr-2"><%= created_excuse.time_format %></p>
+            <p><%= created_excuse.title %></p>
+          </div>
+      <% end %>
+    </div>
   </div>
 </div>
