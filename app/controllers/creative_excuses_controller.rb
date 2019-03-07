@@ -11,9 +11,6 @@ class CreativeExcusesController < ApplicationController
     @random_excuse = random_selection
   end
 
-  def save
-  end
-
   def new
     @creative_excuse = CreativeExcuse.new
   end
@@ -22,7 +19,7 @@ class CreativeExcusesController < ApplicationController
     @creative_excuse = CreativeExcuse.new(creative_excuse_params)
     @creative_excuse.user = current_user
     if @creative_excuse.save
-      redirect_to user_path(current_user)
+      redirect_to creative_excuse_url(@creative_excuse), notice: 'Your excuse was saved.'
     else
       render :new
     end
@@ -55,7 +52,7 @@ class CreativeExcusesController < ApplicationController
   end
 
   def creative_excuse_params
-    params.require(:creative_excuse).permit(:title, :description, :photo)
+    params.require(:creative_excuse).permit(:title, :description, :category)
   end
 
   def set_creative_excuse
