@@ -16,8 +16,10 @@
     <div id="coordinates" style="display: none;" >
       <%= @coordinates %>
     </div>
-
-    <%= link_to "next excuse", location_excuse_path(@location_excuse.id + 1) %>
+    <% if LocationExcuse.find(@location_excuse.id + 1) %>
+    <%= link_to "next excuse", location_excuse_path(@location_excuse.id + 1), class: "btn" %>
+    <% else %>
+    <%= link_to "next excuse", pages_no_excuse_path, class: "btn" %>
     <%= link_to "home", root_path %>
     <div
       id="map"

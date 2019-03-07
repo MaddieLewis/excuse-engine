@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
+  get "/pages/no_excuse", to: "pages#no_excuse"
 
   resources :creative_excuses, only: [:show, :new, :create, :edit, :update] do
     resources :saved_excuses, only: [:new, :create]
