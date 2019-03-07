@@ -13,15 +13,13 @@ body {
   h2, h3, h5, h6 {
     font-weight: 900;
     color: $gray;
-  }
-
-  h4 {
-    font-weight: 900;
-    color: $gray;
+    text-transform: uppercase;
   }
 
   h5 {
-
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 36px;
   }
 
   p {
