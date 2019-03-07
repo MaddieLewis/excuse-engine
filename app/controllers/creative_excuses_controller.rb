@@ -7,11 +7,8 @@ class CreativeExcusesController < ApplicationController
     creative_excuses = CreativeExcuse.all
     session[:seen_ids] = [] if session[:seen_ids].count == creative_excuses.count
     @saved_excuse = SavedExcuse.new()
-    if params[:id].class == Integer
-      @creative_excuse = CreativeExcuse.find(params[:id])
-    else
-      @creative_excuse = random_selection
-    end
+    @creative_excuse = CreativeExcuse.find(params[:id])
+    @random_excuse= random_selection
   end
 
   def save
@@ -54,6 +51,7 @@ class CreativeExcusesController < ApplicationController
     @selection = @random_array.sample
     session[:seen_ids] << @selection.id
     @random_array.delete(@selection)
+    return @selection
     # above line returns @selection
   end
 

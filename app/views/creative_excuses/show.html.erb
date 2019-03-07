@@ -3,11 +3,12 @@
   <%= @creative_excuse.title %>
   <%= @creative_excuse.description %>
 
-  <%= link_to "give me something else", creative_excuse_path(@creative_excuse), class: "btn btn-intro mt-3" %>
+  <%= link_to "give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-3" %>
 
   <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
       <div class="form-actions">
         <%= f.button :submit, "Save Excuse!", id: 'clickme'%>
+
       </div>
   <% end %>
   <div class="btn mt" id="fakebtn">

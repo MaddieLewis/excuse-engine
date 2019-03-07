@@ -5,11 +5,9 @@ const saved = () => {
   if(button && hidden) {
     button.addEventListener('click', (e) => {
       if (document.getElementById('data').dataset.signed == 'true') {
-        console.log("CLICKED")
-        e.target.innerHTML = 'Saved!';
+        e.target.innerHTML = 'Saving...!';
       }
       setTimeout(function() {
-        console.log("HERE")
         hidden.click()
       }, 1000)
     });
