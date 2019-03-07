@@ -6,10 +6,12 @@ const saved = () => {
     button.addEventListener('click', (e) => {
       if (document.getElementById('data').dataset.signed == 'true') {
         e.target.innerHTML = 'Saving...!';
+
       }
       setTimeout(function() {
         hidden.click()
       }, 1000)
+
     });
   }
 }
