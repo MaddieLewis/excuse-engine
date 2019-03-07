@@ -1,7 +1,9 @@
 import mapboxgl from 'mapbox-gl';
 
-let coordinates = document.getElementById('coordinates').innerHTML;
-coordinates = JSON.parse(coordinates);
+let coordinates = document.getElementById('coordinates');
+if (coordinates) {
+  coordinates = JSON.parse(coordinates.innerHTML);
+}
 // console.log(coordinates);
 
 const initMapbox = () => {
