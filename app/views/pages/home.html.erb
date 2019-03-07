@@ -1,15 +1,16 @@
-<div class="parent-center">
-    <%= image_tag "logo.png", alt: "EE logo", class: "logo" %>
-  <div class="title">
-    <h3>THE</h3>
-    <h1>EXCUSE</h1>
-
-    <h3 class="mb-5">ENGINE</h3>
+<body style="background-image: url('<%= asset_url 'eebackground.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;">
+  <div class="parent-center" style="justify-content: space-between;">
+      <%= image_tag "logo.png", alt: "EE logo", class: "logo" %>
+    <div class="header">
+      <h4>THE</h3>
+      <h1>EXCUSE</h1>
+      <h3>ENGINE</h3>
+    </div>
+    <p class="light">Specialists in <span class="bold">location-based</span> excuses</p>
+    <div class="excuse-button">
+      <%= link_to "FIND AN EXCUSE", new_location_excuse_path, class: "btn"%>
+    </div>
+    <p class="mb-2">Or...</p>
+    <%= link_to "Find a creative excuse", creative_excuse_path(@creative_excuse), class: "link mb-5"%>
   </div>
-  <div class="excuse-button">
-    <%= link_to "FIND AN EXCUSE", new_location_excuse_path, class: "btn"%>
-  </div>
-  <p>Or...</p>
-  <p><%= link_to "Find a creative excuse", creative_excuse_path(@creative_excuse)%></p>
-
-</div>
+</body>

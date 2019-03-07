@@ -14,6 +14,16 @@ body {
     font-weight: 900;
     color: $gray;
   }
+
+  h4 {
+    font-weight: 900;
+    color: $gray;
+  }
+
+  h5 {
+
+  }
+
   p {
     font-weight: 500;
     color: $gray;
@@ -25,7 +35,7 @@ body {
   }
   a :hover {
     font-weight: 500;
-    color: $blue;
+    color: $light-gray;
     text-decoration: none;
   }
   h4, h5, h6 {

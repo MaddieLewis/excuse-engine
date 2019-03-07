@@ -10,7 +10,7 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>
   </head>
-  <body style="background-image: url('<%= asset_url 'eebackground.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;">
+  <body">
     <%= render 'layouts/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>

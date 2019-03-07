@@ -1,9 +1,14 @@
-<div class="container parent-center">
-  <div class="width-100">
-    <%= simple_form_for @location_excuse do |f| %>
-      <%= f.input :start_point %>
-      <%= f.input :end_point %>
-      <%= f.button :submit, class: "btn btn-wide" %>
-    <% end %>
+<body style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;">
+  <div class="container parent-center" style="justify-content: center;">
+    <h2 class="mb-5" style="font-weight: 100">WHERE ARE YOU GOING?</h1>
+    <div class="width-100 mt-5">
+      <%= simple_form_for @location_excuse do |f| %>
+        <%= f.input :start_point %>
+        <%= f.input :end_point %>
+    </div>
+    <div class="width-80" style="align-self: flex-end;">
+        <%= f.button :submit, "EXCUSE ME", class: "btn btn-wide" %>
+      <% end %>
+    </div>
   </div>
-</div>
+</body>

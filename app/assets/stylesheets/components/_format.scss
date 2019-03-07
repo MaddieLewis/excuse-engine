@@ -3,15 +3,47 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
 }
 
 .width-100 {
   width: 100%;
 }
 
-.header {
+.width-80 {
+  width: 80%;
+}
 
+.header {
+  h1 {
+    font-size: 60px;
+    line-height: 21px;
+  }
+  h3 {
+    font-size: 40px;
+  }
+  h4 {
+    line-height: 36px;
+  }
+}
+
+.bold {
+  color: $yellow;
+}
+
+.light {
+  font-weight: lighter;
+}
+
+.link {
+  font-weight: 500;
+  color: $gray;
+  text-decoration: none;
+}
+
+.link:hover {
+  font-weight: 500;
+  color: $light-gray;
+  text-decoration: none;
 }
 
 .mt-100 {
