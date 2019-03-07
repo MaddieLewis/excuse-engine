@@ -14,11 +14,11 @@ class LocationExcusesController < ApplicationController
   def create
     @location_excuse = LocationExcuse.create(location_excuse_params)
     traffic = find_tra_excuses
-    tfl = find_excuses('') + find_excuses('bus') + find_excuses('bus,tube')
-    tfl.reject!{ |excuse| excuse == {} }
+    # tfl = find_excuses('') + find_excuses('bus') + find_excuses('bus,tube')
+    # tfl.reject!{ |excuse| excuse == {} }
     traffic_excuses= traffic.map { |excuse| new_loop(excuse) }
     tfl_excuses = tfl.uniq.map { |excuse| new_loop(excuse) }
-    all_excuses = tfl_excuses + traffic_excuses
+    all_excuses = traffic_excuses
     unless all_excuses.empty?
       all_excuses.map do |excuse|
         unless excuse&.lines_disrupted.nil? || excuse&.disruption_message.nil?
