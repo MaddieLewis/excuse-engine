@@ -21,4 +21,8 @@ class CreativeExcuse < ApplicationRecord
     end
   end
 
+  def time_format
+    self.created_at.strftime("%B %d, %Y")
+  end
+
 end

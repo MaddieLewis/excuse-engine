@@ -1,6 +1,6 @@
 <div class="container" id="data" data-signed=<%= user_signed_in? %>>
   <h1>Excuse Found!</h1>
-  <%= "Reported "  %>
+  <p>Reported on  <%=  @creative_excuse.time_format%></p>
 
 
   <%= @creative_excuse.icon %>
