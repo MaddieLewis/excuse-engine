@@ -1,5 +1,11 @@
 <div class="container" id="data" data-signed=<%= user_signed_in? %>>
-  <h1>Show, creative excuses</h1>
+  <h1>Excuse Found!</h1>
+  <%= "Reported "  %>
+
+
+  <%= @creative_excuse.icon %>
+
+
   <%= @creative_excuse.title %>
   <%= @creative_excuse.description %>
 
@@ -15,5 +21,6 @@
     Save excuse
   </div>
 </div>
+
 
 
