@@ -25,7 +25,7 @@
     </div>
 
     <div class="border-top border-secondary  mt-100">
-      <h6 class="mt-100">Favorite Excuses</h6>
+      <h6 class="mt-100 mb-3">Favorite Excuses</h6>
       <% @user.saved_excuses.each do |saved_excuse|  %>
         <% if saved_excuse.excuse_type == "CreativeExcuse" %>
           <p><%= saved_excuse.excuse.title %></p>
