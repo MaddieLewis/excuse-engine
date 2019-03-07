@@ -13,13 +13,14 @@ class LocationExcusesController < ApplicationController
 
   def create
     @location_excuse = LocationExcuse.create(location_excuse_params)
-    # traffic = find_tra_excuses
+    traffic = find_tra_excuses
     tfl = find_excuses('') + find_excuses('bus') + find_excuses('bus,tube')
-    # traffic_excuses = traffic.map { |excuse| new_loop(excuse) }
+    tfl.reject!{ |excuse| excuse == {} }
+    traffic_excuses= traffic.map { |excuse| new_loop(excuse) }
     tfl_excuses = tfl.uniq.map { |excuse| new_loop(excuse) }
-    # all_excuses = tfl_excuses
-    unless tfl_excuses.empty?
-      tfl_excuses.map do |excuse|
+    all_excuses = tfl_excuses + traffic_excuses
+    unless all_excuses.empty?
+      all_excuses.map do |excuse|
         unless excuse&.lines_disrupted.nil? || excuse&.disruption_message.nil?
           unless excuse.save
             render :new
@@ -27,9 +28,9 @@ class LocationExcusesController < ApplicationController
         end
       end
     end
-
-    if !tfl_excuses.first.nil?
-      @location_excuse = tfl_excuses.first
+    raise
+    if !all_excuses.first.nil?
+      @location_excuse = all_excuses.first
       redirect_to location_excuse_path(@location_excuse)
     else
       render :new
@@ -61,8 +62,8 @@ class LocationExcusesController < ApplicationController
   end
 
   def tra_api_call
-    user_start_point = "#{@location_excuse.start_longitude},#{@location_excuse.start_latitude}"
-    user_end_point = "#{@location_excuse.end_longitude},#{@location_excuse.end_latitude}"
+    user_start_point = "#{@location_excuse.start_latitude},#{@location_excuse.start_longitude}"
+    user_end_point = "#{@location_excuse.end_latitude},#{@location_excuse.end_longitude}"
     # user_start_point = @location_excuse.start_point
     # user_end_point = @location_excuse.end_point
     response = HTTP.get("https://traffic.api.here.com/traffic/6.3/incidents.json?app_id=#{TRA_APP_ID}&app_code=#{TRA_APP_CODE}&bbox=#{user_start_point};#{user_end_point}")
