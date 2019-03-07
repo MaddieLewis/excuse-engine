@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
-    <title>Excuse Engine</title>
+    <%= favicon_link_tag "logo.ico" %>
+    <title>The Excuse Engine - Specialists in Location-Based Excuses</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>
   </head>
-  <body>
+  <body style="background-image: url('<%= asset_url 'eebackground.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;">
     <%= render 'layouts/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>

@@ -1,4 +1,4 @@
-<div class="container parent-center">
+<div class="container">
   <div class="width-100">
     <h1>The <%= @location_excuse.lines_disrupted %> line is disrupted</h1>
     <p><%= @location_excuse.disruption_message %></p>
@@ -6,7 +6,6 @@
     <% @coordinates = [] %>
     <% @location_excuse.journey_route.each do |leg|%>
       <% leg = JSON.parse(leg) %>
-      <%#= leg.class %>
 
       <% leg.each do |coords| %>
         <% @coordinates << [coords[1], coords[0]] %>

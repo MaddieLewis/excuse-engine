@@ -2,11 +2,13 @@
 <%= render "layouts/sign_up" %>
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "" %>
+    <%= image_tag "logo.png" %>
    <!--  <span id="logo-text">EXCUSE ENGINE</span> -->
   <% end %>
 
   <% unless current_user %>
+
+    <%= link_to "Login", new_user_session_path, class: "" %>
     <%= link_to "Login", new_user_session_path, class: "btn btn-link" %>
     <%= link_to "Sign up", new_user_registration_path, class: "btn btn-link" %>
 

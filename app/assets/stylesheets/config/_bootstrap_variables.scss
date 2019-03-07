@@ -6,17 +6,16 @@
 // General style
 $font-family-sans-serif:  $body-font;
 $headings-font-family:    $headers-font;
-$body-bg:                 $light-gray;
 
 // Colors
-$primary:   $blue;
+$primary:   #FFBA34;
 // $secondary: $your-secondary-color;
-$success:   $green;
+$success:   #9CF0F5;
 $info:      $yellow;
-$danger:    $red;
+$danger:    #FF5656;
 $warning:   $orange;
 $light:     $light-gray;
-$dark:      $gray;
+$dark:      #575757;
 // Override other variables below!
 $enable-rounded: false;
 $breadcrumb-divider: quote(">");

@@ -1,6 +1,5 @@
 require 'HTTP'
 
-
 APP_CODE = "n0K7Vhr8L2HsJuUBaR-Vlg"
 APP_ID = "aQEtAgHGwVSbjtgKfmjq"
 
@@ -25,21 +24,20 @@ traffic.first(3).each do |traffic_item|
   e_comments = traffic_item['TRAFFIC_ITEM_DESCRIPTION'][0]['value'].split(' - ').last
   e_start_date = traffic_item['START_TIME']
   e_area = traffic_item['TRAFFIC_ITEM_DESCRIPTION'][0]['value'].split(' - ').first
-  r_origin_lat = traffic_item['LOCATION']['GEOLOC']['ORIGIN']['LATITUDE']
-  r_origin_long = traffic_item['LOCATION']['GEOLOC']['ORIGIN']['LONGITUDE']
-  r_to_lat = traffic_item['LOCATION']['GEOLOC']['TO'][0]['LATITUDE']
-  r_to_long = traffic_item['LOCATION']['GEOLOC']['TO'][0]['LONGITUDE']
-  if e_area == "Past "
-    e_area = traffic_item['LOCATION']['INTERSECTION']['ORIGIN']['STREET1']['ADDRESS1']
-  else
-    e_area
-  end
+  geo = traffic_item['LOCATION']['GEOLOC']
+  r_origin_lat = geo['ORIGIN']['LATITUDE']
+  r_origin_long = geo['ORIGIN']['LONGITUDE']
+  r_to_lat = geo['TO'][0]['LATITUDE']
+  r_to_long = geo['TO'][0]['LONGITUDE']
+  e_message = "Traffic Alert: #{e_area}\nReason: #{e_comments}\nReported at: #{e_start_date}"
+  e_area == "Past " ? e_area = traffic_item['LOCATION']['INTERSECTION']['ORIGIN']['STREET1']['ADDRESS1'] : e_area
   puts "Excuse tag: #{e_tag}"
   puts "Comments: #{e_comments}"
   puts "Started on: #{e_start_date}"
   puts "Area affected: #{e_area}"
   puts "Disruption begins: #{r_origin_lat}, #{r_origin_long}"
   puts "Disruption ends: #{r_to_lat}, #{r_to_long}"
+  #LocationExcuse.new(start_point: user_start_point, end_point: user_end_point, lines_disrupted: e_area, disruption_message: e_message, journeys: [], journey_route: [[r_origin_lat,r_origin_long],[r_to_lat,r_to_long]])
 end
 
 
