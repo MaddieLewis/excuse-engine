@@ -2,8 +2,10 @@ class LocationExcusesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[new show create]
   before_action :set_location_excuse, only: :show
 
-  TFL_APP_ID = "abc3208f"
-  TFL_APP_KEY = "db291aa92151ac115d9f5f367ba115d5"
+  TFL_APP_ID = ENV['TFL_APP_ID']
+  TFL_APP_KEY = ENV['TFL_APP_KEY']
+  TRA_APP_CODE = ENV['TRA_APP_CODE']
+  TRA_APP_ID = ENV['TRA_APP_ID']
 
   def new
     @location_excuse = LocationExcuse.new
@@ -11,8 +13,11 @@ class LocationExcusesController < ApplicationController
 
   def create
     @location_excuse = LocationExcuse.new(location_excuse_params)
-    all = find_excuses('') + find_excuses('bus') + find_excuses('bus,tube')
-    all_excuses = all.uniq.map { |excuse| new_loop(excuse) }
+    traffic = find_tra_excuses
+    tfl = find_excuses('') + find_excuses('bus') + find_excuses('bus,tube')
+    traffic_excuses = traffic.map { |excuse| new_loop(excuse) }
+    tfl_excuses = tfl.uniq.map { |excuse| new_loop(excuse) }
+    all_excuses = traffic_excuses + tfl_excuses
 
     unless all_excuses.empty?
       all_excuses.map do |excuse|
@@ -38,7 +43,7 @@ class LocationExcusesController < ApplicationController
   private
 
   def location_excuse_params
-    params.require(:location_excuse).permit(:start_point, :end_point, :journeys)
+    params.require(:location_excuse).permit(:start_point, :end_point)
   end
 
   def set_location_excuse
@@ -46,10 +51,45 @@ class LocationExcusesController < ApplicationController
   end
 
   def api_call(mode)
-    start = @location_excuse.start_point.gsub(/ /, "%20")
-    end_pt = @location_excuse.end_point.gsub(/ /, "%20")
+    start = @location_excuse.start_point
+    end_pt = @location_excuse.end_point
     response = HTTP.get("https://api-radon.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?&mode=#{mode}&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}")
     JSON.parse(response)
+  end
+
+  def tra_api_call
+    user_start_point = @location_excuse.start_point
+    user_end_point = @location_excuse.end_point
+    response = HTTP.get("https://traffic.api.here.com/traffic/6.3/incidents.json?app_id=#{TRA_APP_ID}&app_code=#{TRA_APP_CODE}&bbox=#{user_start_point};#{user_end_point}")
+    JSON.parse(response)
+  end
+
+  def find_tra_excuses
+    parsed = tra_api_call
+    arr = []
+    traffic_items = parsed["TRAFFIC_ITEMS"]["TRAFFIC_ITEM"]
+    traffic = traffic_items.select do |traffic_item|
+      criticality = traffic_item['CRITICALITY']['DESCRIPTION']
+      criticality == "critical" || criticality == "major"
+    end
+    traffic.first(5).each do |traffic_item|
+      hash = {}
+      e_area = traffic_item['TRAFFIC_ITEM_DESCRIPTION'][0]['value'].split(' - ').first
+      e_area == "Past " ? e_area = traffic_item['LOCATION']['INTERSECTION']['ORIGIN']['STREET1']['ADDRESS1'] : e_area
+      e_comments = traffic_item['TRAFFIC_ITEM_DESCRIPTION'][0]['value'].split(' - ').last
+      e_start_date = traffic_item['START_TIME']
+      r_origin_lat = traffic_item['LOCATION']['GEOLOC']['ORIGIN']['LATITUDE']
+      r_origin_long = traffic_item['LOCATION']['GEOLOC']['ORIGIN']['LONGITUDE']
+      r_to_lat = traffic_item['LOCATION']['GEOLOC']['TO'][0]['LATITUDE']
+      r_to_long = traffic_item['LOCATION']['GEOLOC']['TO'][0]['LONGITUDE']
+      e_message = "Traffic Alert!\n#{e_area}\nReason: #{e_comments}\nReported at: #{e_start_date}"
+      hash["line"] = "#{e_area}"
+      hash["message"] = "#{e_message}"
+      hash["journey"] = []
+      hash["journey route"] = [[r_origin_lat,r_origin_long],[r_to_lat,r_to_long]]
+      arr << hash
+    end
+    arr
   end
 
   def find_excuses(mode)
