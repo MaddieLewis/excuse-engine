@@ -1,9 +1,8 @@
-<div class="container" id="data" data-signed=<%= user_signed_in? %>>
-  <div class="parent-center">
+<div class="container parent-center2" id="data" data-signed=<%= user_signed_in? %>>
+  <div class="">
     <div style= "display:flex">
-    <h4>Excuse Found!</h4>
+    <h4 class="mt-1">Excuse Found!</h4>
     <% unless @saved_excuse.id  %>
-
       <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
         <button class="submit" style="border: none; background: none">
           <i class="far fa-heart fa-2x" style = "margin-left: 19px; align-items: center; color:#575757" ></i>
@@ -14,10 +13,10 @@
     <% end %>
   </div>
     <p>Reported on  <%=  @creative_excuse.time_format%></p>
-    <span style= "color: #575757"><%= @creative_excuse.icon %></span>
+    <h2 class="mb-0" style= "color: #575757; text-align: center;"><%= @creative_excuse.icon %></h2>
     <br>
-    <h6> <%= @creative_excuse.title %></h6>
-    <p><%= @creative_excuse.description %><p>
+    <h6 class="text-center"> <%= @creative_excuse.title %></h6>
+    <p class="text-center"><%= @creative_excuse.description %><p>
 
 
     <div class="width-100">
