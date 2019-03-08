@@ -6,6 +6,7 @@ if (coordinates) {
 }
 
 const initMapbox = () => {
+  console.log(coordinates.length);
   const mapElement = document.getElementById('map');
   const fitMapToLine = (map, lineCoords) => {
     const bounds = new mapboxgl.LngLatBounds();
@@ -20,7 +21,7 @@ const initMapbox = () => {
       style: 'mapbox://styles/madz/cjsx5f2m92iu31frv61mfq1ih',
       center: [-0.07711901911, 51.53263963289],
       zoom: 10,
-      interactive: false
+      // interactive: false
     });
 
     map.on('load', function () {
@@ -39,13 +40,13 @@ const initMapbox = () => {
           }
         },
         "layout": {
-          "line-join": "round",
+          "line-join": "bevel",
           "line-cap": "round"
         },
         "paint": {
-          "line-color": "#9CF0F5",
-          "line-width": 5,
-          "line-opacity": .8
+          "line-color":   coordinates.length <= 4 ? "#FF0000" : "#9CF0F5",
+          "line-width":  coordinates.length <= 4 ? 15 : 4,
+          "line-opacity": coordinates.length <=4 ? .6 : .8
         }
       });
     });
