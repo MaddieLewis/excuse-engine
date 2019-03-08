@@ -20,7 +20,7 @@ class CreativeExcusesController < ApplicationController
     @creative_excuse = CreativeExcuse.new(creative_excuse_params)
     @creative_excuse.user = current_user
     if @creative_excuse.save
-      redirect_to creative_excuse_url(@creative_excuse), notice: 'Your excuse was saved.'
+      redirect_to creative_excuse_url(@creative_excuse)
     else
       render :new
     end

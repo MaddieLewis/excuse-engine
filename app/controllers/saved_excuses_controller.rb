@@ -13,7 +13,7 @@ class SavedExcusesController < ApplicationController
     cu = CreativeExcuse.find(params[:creative_excuse_id].to_i)
     se = SavedExcuse.new(excuse: cu, user: current_user)
     if se.save
-      redirect_to creative_excuse_path(cu) , notice: 'Your excuse was saved.'
+      redirect_to creative_excuse_path(cu)
       # respond_to do |format|
       #   format.html { redirect_to creative_excuse_path(cu) , notice: 'Your excuse was saved.' }
       #   format.js
