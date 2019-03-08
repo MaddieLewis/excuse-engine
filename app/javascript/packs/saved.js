@@ -1,3 +1,13 @@
+
+console.log("help");
+const saved = () =>{
+  $("button").click(function() {
+    console.log("helpme")
+    $(this).find("i").removeClass("far fa-heart").addClass("fas fa-heart");
+  });
+
+}
+
 // const saved = () => {
 //   const hidden = document.getElementById('clickme');
 //   console.log(hidden);
@@ -16,12 +26,18 @@
 //   }
 // }
 
-const saved = () =>{
-$("button").click(function(){
-    $(this).find("i").removeClass("far fa-heart").addClass("fas fa-heart");
-});
 
-}
+
+// const saved = () => {
+//   const button = document.querySelector("button");
+
+//     button.addEventListener('click', (e) => {
+//       e.preventDefault();
+//       console.log("event");
+//       e.removeClass("far fa-heart").addClass("fas fa-heart");
+//     })
+
+// }
 
 
 // const saved = () => {

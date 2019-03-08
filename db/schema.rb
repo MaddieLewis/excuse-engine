@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_151003) do
+ActiveRecord::Schema.define(version: 2019_03_08_121936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_151003) do
     t.bigint "excuse_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "favorite", default: false
     t.index ["excuse_type", "excuse_id"], name: "index_saved_excuses_on_excuse_type_and_excuse_id"
     t.index ["user_id"], name: "index_saved_excuses_on_user_id"
   end

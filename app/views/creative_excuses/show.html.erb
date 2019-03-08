@@ -6,10 +6,14 @@
     <br>
     <h6> <%= @creative_excuse.title %></h6>
     <p><%= @creative_excuse.description %><p>
-    <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
-      <button type="submit">
+    <% if !@saved_excuse.id %>
+      <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
+        <button class="submit">
           <i class="far fa-heart"></i>
-      </button>
+        </button>
+      <% end %>
+    <% else %>
+        <i class="fas fa-heart" style="color: red"></i>
     <% end %>
 
     <div class="width-100">
@@ -18,6 +22,4 @@
   </div>
 </div>
 
-<div class= "container width-100">
-<button class="btn btn-default" data-toggle="tooltip" title="Like"><i class="far fa-heart"></i></button>
-</div>
+

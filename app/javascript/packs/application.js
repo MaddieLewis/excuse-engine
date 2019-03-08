@@ -8,4 +8,5 @@ import { saved, } from './saved';
 
 initMapbox();
 initAutocomplete();
-saved();
+
+// import "../views/creative_excuses/show.js.erb";
