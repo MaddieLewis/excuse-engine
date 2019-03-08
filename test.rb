@@ -2,14 +2,16 @@ require 'HTTP'
 
 TFL_APP_ID = "abc3208f"
 TFL_APP_KEY = "db291aa92151ac115d9f5f367ba115d5"
+
 start = "SW7%202HL"
 end_pt = "E2%208DY"
 time = "0700"
 
-response = HTTP.get("https://api-radon.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}")
+response = HTTP.get("https://api.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}")
 # bus = HTTP.get("https://api-radon.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?time=#{time}&mode=bus&app_id=abc3208f&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}")
 # tube_bus = HTTP.get("https://api-radon.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?time=#{time}&mode=tube,bus&app_id=abc3208f&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}")
-
+url = "https://api.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}"
+p url
 PARSED = JSON.parse(response)
 def find_all_journeys
     arr = []

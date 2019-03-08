@@ -1,18 +1,30 @@
-<div class="parent-center container" style="justify-content: center;">
-    <h5 class="mt-3 text-center">excuse found</h5>
+<div class="parent-center container" style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;justify-content: center;">
+    <h5 class="text-center mb-5">excuse found</h5>
     <% @location_excuse.lines_disrupted.to_i > 0 ? @mode = "bus" : @mode = "line" %>
     <% @mode = "road" if @location_excuse.journeys == [] %>
-    <h2 class="mt-3 text-center">The <%= @location_excuse.lines_disrupted %> <%= @mode %> is disrupted</h2>
-    <p class="mt-3 text-center"><%= @location_excuse.disruption_message %></p>
-  </div>
-  <% if LocationExcuse.find(@location_excuse.id + 1) %>
-    <%= link_to "next excuse", location_excuse_path(@location_excuse.id + 1), class: "btn" %>
-    <% else %>
-    <%= link_to "next excuse", pages_no_excuse_path, class: "btn" %>
+    <% if  @mode == "bus" %>
+      <i class="fas fa-bus"></i>
+    <% elsif @mode == "road" %>
+      <i class="fas fa-bus"></i>
+    <% elsif @mode == "line" %>
+      <i class="fas fa-subway"></i>
     <% end %>
-</div>
+    <% if @mode == "road" %>
+    <h2 class="mt-3 text-center">There are traffic delays <%= @location_excuse.lines_disrupted %></h2>
+    <% else %>
+    <h2 class="mt-3 text-center">The <%= @location_excuse.lines_disrupted %> <%= @mode %> has disruptions</h2>
+    <% end %>
+    <p class="mt-3 text-center"><%= @location_excuse.disruption_message %></p>
+  <% if !@next_excuse.nil? %>
+    <%= link_to "Need another excuse?", location_excuse_path(@next_excuse), class: "link" %>
+    <% else %>
+    <%= link_to "No more excuses found for your journey - try a creative excuse", creative_excuse_path(), class: "link" %>
+  <% end %>
+  </div>
 <div style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;" class="parent-center">
-    <p><%= @location_excuse.journeys %></p>
+    <% unless @location_excuse.journeys.empty? %>
+      <p><%= @location_excuse.journeys %></p>
+    <% end %>
     <% @coordinates = [] %>
     <% @location_excuse.journey_route.each do |leg|%>
     <% unless leg.class == Array %>
