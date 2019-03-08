@@ -6,7 +6,6 @@ if (coordinates) {
 }
 
 const initMapbox = () => {
-  console.log(coordinates.length);
   const mapElement = document.getElementById('map');
   const fitMapToLine = (map, lineCoords) => {
     const bounds = new mapboxgl.LngLatBounds();

@@ -7,7 +7,7 @@ class CreativeExcusesController < ApplicationController
     creative_excuses = CreativeExcuse.all
     session[:seen_ids] = [] if session[:seen_ids].count == creative_excuses.count
     @creative_excuse = CreativeExcuse.find(params[:id])
-    savex = SavedExcuse.where(excuse_id: @creative_excuse.id).first
+    savex = current_user ? SavedExcuse.where(excuse_id: @creative_excuse.id, user_id: current_user.id).first : nil
     @saved_excuse = savex ? savex : SavedExcuse.new
     @random_excuse = random_selection
   end
