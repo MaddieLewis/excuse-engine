@@ -33,6 +33,7 @@ class LocationExcusesController < ApplicationController
     else
       redirect_to pages_no_excuse_path
     end
+
   end
 
   def show

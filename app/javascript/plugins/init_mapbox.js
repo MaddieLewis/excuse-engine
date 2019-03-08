@@ -43,7 +43,7 @@ const initMapbox = () => {
           "line-cap": "round"
         },
         "paint": {
-          "line-color":   coordinates.length <= 4 ? "#FF0000" : "#9CF0F5",
+          "line-color":   coordinates.length <= 4 ? "#FF0000" : "#FFBA34",
           "line-width":  coordinates.length <= 4 ? 15 : 4,
           "line-opacity": coordinates.length <=4 ? .6 : .8
         }
