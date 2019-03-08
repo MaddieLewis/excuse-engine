@@ -33,12 +33,17 @@ class LocationExcusesController < ApplicationController
       @location_excuse = all_excuses.first
       redirect_to location_excuse_path(@location_excuse)
     else
-      render :new
+      redirect_to pages_no_excuse_path
     end
   end
 
   def show
     @mode = ""
+    if @location_excuse == LocationExcuse.last
+      @next_excuse = nil
+    else
+      @next_excuse = LocationExcuse.find(@location_excuse.id + 1)
+    end
   end
 
   private
@@ -73,6 +78,8 @@ class LocationExcusesController < ApplicationController
 
   def find_tra_excuses
     parsed = tra_api_call
+    return [] if parsed["TRAFFIC_ITEMS"].nil?
+
     arr = []
     traffic_items = parsed["TRAFFIC_ITEMS"]["TRAFFIC_ITEM"]
     traffic = traffic_items.select do |traffic_item|
