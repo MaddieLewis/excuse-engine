@@ -6,18 +6,29 @@ class User < ApplicationRecord
   has_many :saved_excuses
   has_many :creative_excuses
   has_many :location_excuses, through: :saved_excuses
+  after_create :send_welcome_email
 
   def level
     if self.saved_excuses.count <= 3
-      "<h3>Level 1</h3>".html_safe
+      1
     elsif self.saved_excuses.count > 3 && self.saved_excuses.count <= 5
-      "<h3>Level 2</h3>".html_safe
+      2
     elsif self.saved_excuses.count > 5 && self.saved_excuses.count <= 10
-      "<h3>Level 3</h3>".html_safe
+      3
     elsif self.saved_excuses.count > 10 && self.saved_excuses.count <= 15
-      "<h3>Level 4</h3>".html_safe
+      4
     elsif self.saved_excuses.count > 15
-      "<h3>Level 5</h3>".html_safe
+      5
     end
   end
+
+  private
+
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_now
+  end
+
+  # def send_levelup_email
+  #   UserMailer.levelup(self).deliver_now
+  # end
 end
