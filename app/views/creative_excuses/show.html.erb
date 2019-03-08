@@ -1,18 +1,18 @@
 <div class="container" style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 92.25vh;justify-content: center;" id="data" data-signed=<%= user_signed_in? %>>
   <div class="parent-center" style="justify-content: center;">
-    <h4>Excuse Found!</h4>
-    <%= @creative_excuse.icon %>
+    <h5>Excuse Found!</h5>
     <br>
-    <div class="d-flex align-center">
+    <%= @creative_excuse.icon %>
+    <div class="d-flex align-center mt-3">
     <h3 class="text-center"> <%= @creative_excuse.title %></h3>
     <% if !@saved_excuse.id %>
       <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
-        <button class="submit mr-3" style="border: none">
+        <button class="submit mr-3" style="border: none; background: none;">
           <i class="far fa-heart fa-3x"></i>
         </button>
       <% end %>
     <% else %>
-        <i class="fas fa-heart fa-3x" style="color: red"></i>
+        <i class="fas fa-heart fa-3x" style="color: red; background: none;"></i>
     <% end %>
     </div>
     <p><%= @creative_excuse.description %><p>

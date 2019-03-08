@@ -1,4 +1,4 @@
-<div class="details-page" style="">
+<div class="details-page" style="align-items: center; justify-content: center;">
   <% @location_excuse.lines_disrupted.to_i > 0 ? @mode = "bus" : @mode = "line" %>
     <% @mode = "road" if @location_excuse.journeys  == [] %>
     <% if @mode == "road" %>
@@ -37,17 +37,17 @@
       data-markers="<%= @markers.to_json %>"
       data-mapboxApiKey="<%= ENV['MAPBOX_API_KEY'] %>"
     ></div>
-    <div class="details-page">
-    <div class="mt-3 width-90">
-      <p><%= @location_excuse.disruption_message %><p>
-    </div>
+    <div class="details-page"  style="align-items: center; justify-content: center;">
+      <div class="mt-3 width-90">
+        <p><%= @location_excuse.disruption_message %><p>
+      </div>
     <div class="width-90">
       <p style="color:#FFBA34;">EXCUSE MESSAGE</p>
-      <div class ="width-90 p-3 d-flex justify-content-between" style="color:#575757; background-color:#F4F4F4; " contenteditable="true">
+      <div class ="p-3 d-flex justify-content-between" style="color:#575757; background-color:#F4F4F4;" contenteditable="true">
         I’m sorry, I’m running late this morning.
         The <%= @location_excuse.lines_disrupted %> <%= @mode %> is disrupted and
         has affected my route. It will take me <%= @location_excuse.journeys[1] %> minutes to get in.
-        <div style="background-color: #9CF0F5; padding: 6px 8px; padding-bottom: 2px; border-radius: 50%; height: 34px; width: 34px; object-fit: cover;">
+        <div style="background-color: #9CF0F5; padding: 6px 8px; padding-bottom: 2px; border-radius: 50%; height: 34px; width: 34px; object-fit: cover;" contenteditable="false">
           <i class="far fa-copy" style="font-size: 23px; color: white;"></i>
         </div>
       </div>
@@ -62,5 +62,5 @@
             </ul>
         </div>
     <% end %>
-
+</div>
 </div>
