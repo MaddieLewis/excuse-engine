@@ -1,4 +1,4 @@
-<div class="parent-center container" style="justify-content: center;">
+<div class="parent-center container" style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;justify-content: center;">
     <h5 class="text-center mb-5">excuse found</h5>
     <% @location_excuse.lines_disrupted.to_i > 0 ? @mode = "bus" : @mode = "line" %>
     <% @mode = "road" if @location_excuse.journeys == [] %>
@@ -22,7 +22,9 @@
   <% end %>
   </div>
 <div style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;" class="parent-center">
-    <p><%= @location_excuse.journeys %></p>
+    <% unless @location_excuse.journeys.empty? %>
+      <p><%= @location_excuse.journeys %></p>
+    <% end %>
     <% @coordinates = [] %>
     <% @location_excuse.journey_route.each do |leg|%>
     <% unless leg.class == Array %>

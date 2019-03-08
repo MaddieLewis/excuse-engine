@@ -1,6 +1,6 @@
 class LocationExcusesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[new show create]
-  before_action :set_location_excuse, only: :show
+  skip_before_action :authenticate_user!, only: %i[new show create details]
+  before_action :set_location_excuse, only: %i[show, details]
 
   TFL_APP_ID = ENV['TFL_APP_ID']
   TFL_APP_KEY = ENV['TFL_APP_KEY']
@@ -39,6 +39,9 @@ class LocationExcusesController < ApplicationController
 
   def show
     @mode = ""
+  end
+
+  def details
     if @location_excuse == LocationExcuse.last
       @next_excuse = nil
     else
