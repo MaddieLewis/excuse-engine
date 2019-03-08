@@ -1,26 +1,21 @@
-
-<div class="container parent-center2" id="data" style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 92.25vh;" data-signed=<%= user_signed_in? %>>
-  <div class="">
-    <div style= "display:flex">
-    <h4 class="mt-1">Excuse Found!</h4>
-    <% unless @saved_excuse.id  %>
+<div class="container" style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 92.25vh;justify-content: center;" id="data" data-signed=<%= user_signed_in? %>>
+  <div class="parent-center" style="justify-content: center;">
+    <h4>Excuse Found!</h4>
+    <%= @creative_excuse.icon %>
+    <br>
+    <div class="d-flex align-center">
+    <h3 class="text-center"> <%= @creative_excuse.title %></h3>
+    <% if !@saved_excuse.id %>
       <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
-        <button class="submit" style="border: none; background: none">
-          <i class="far fa-heart fa-2x" style = "margin-left: 19px; align-items: center; color:#575757" ></i>
+        <button class="submit mr-3" style="border: none">
+          <i class="far fa-heart fa-3x"></i>
         </button>
       <% end %>
     <% else %>
-        <i class="fas fa-heart fa-2x" style=" color: #FFBA34; margin-left: 20px; align-items: center;"></i>
+        <i class="fas fa-heart fa-3x" style="color: red"></i>
     <% end %>
     </div>
     <p><%= @creative_excuse.description %><p>
-  </div>
-    <h2 class="mb-0" style= "color: #575757; text-align: center;"><%= @creative_excuse.icon %></h2>
-    <br>
-    <h6 class="text-center"> <%= @creative_excuse.title %></h6>
-    <p class="text-center"><%= @creative_excuse.description %><p>
-
-
     <div class="width-100">
       <%= link_to "Give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-3 width-100"  %>
     </div>
