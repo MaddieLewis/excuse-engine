@@ -1,21 +1,21 @@
-<div class="container" id="data" data-signed=<%= user_signed_in? %>>
+<div class="container" style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 92.25vh;justify-content: center;" id="data" data-signed=<%= user_signed_in? %>>
   <div class="parent-center">
     <h4>Excuse Found!</h4>
-    <p>Reported on  <%=  @creative_excuse.time_format%></p>
     <%= @creative_excuse.icon %>
     <br>
-    <h6> <%= @creative_excuse.title %></h6>
-    <p><%= @creative_excuse.description %><p>
+    <div class="d-flex align-center">
+    <h3 class="text-center"> <%= @creative_excuse.title %></h3>
     <% if !@saved_excuse.id %>
       <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
-        <button class="submit" style="border: none">
-          <i class="far fa-heart fa-3x" ></i>
+        <button class="submit mr-3" style="border: none">
+          <i class="far fa-heart fa-3x"></i>
         </button>
       <% end %>
     <% else %>
         <i class="fas fa-heart fa-3x" style="color: red"></i>
     <% end %>
-
+    </div>
+    <p><%= @creative_excuse.description %><p>
     <div class="width-100">
       <%= link_to "Give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-3 width-100"  %>
     </div>
