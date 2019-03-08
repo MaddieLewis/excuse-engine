@@ -4,9 +4,9 @@
     <br>
     <%= @creative_excuse.icon %>
     <div class="">
-    <h3 class="mt-3"> <%= @creative_excuse.title %></h3>
+    <h3 class="mt-3 text-center"> <%= @creative_excuse.title %></h3>
     </div>
-    <p><%= @creative_excuse.description %><p>
+    <p class="text-center"><%= @creative_excuse.description %><p>
     <div class="width-100 d-flex justify-content-around align-items-center">
       <%= link_to "Give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-3"  %>
     <% if !@saved_excuse.id %>
