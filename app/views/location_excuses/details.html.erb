@@ -9,14 +9,23 @@
     <% end %>
     <% @coordinates = [] %>
     <% @location_excuse.journey_route.each do |leg|%>
-    <% unless leg.class == Array %>
-      <% leg = JSON.parse(leg) %>
-    <% end %>
 
-      <% leg.each do |coords| %>
-        <% @coordinates << [coords[1], coords[0]] %>
+      <% unless leg.class == Array %>
+        <% leg = JSON.parse(leg) %>
+        <% leg.each do |coords| %>
+          <% @coordinates << [coords[1], coords[0]] %>
+        <% end %>
+
+      <% else %>
+
+        <% @location_excuse.journey_route.each do |coords| %>
+          <% @coordinates << [coords[1].to_f, coords[0].to_f] %>
+        <% end %>
+
       <% end %>
     <% end %>
+
+
     <div id="coordinates" style="display: none;" >
       <%= @coordinates %>
     </div>

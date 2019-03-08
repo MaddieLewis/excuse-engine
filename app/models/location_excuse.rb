@@ -8,7 +8,7 @@ class LocationExcuse < ApplicationRecord
   private
 
   def geocode_endpoints
-   if start_point_changed?
+    if start_point_changed?
       geocoded = Geocoder.search(start_point).first
       if geocoded
         self.start_longitude = geocoded.longitude
