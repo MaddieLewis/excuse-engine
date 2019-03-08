@@ -1,20 +1,24 @@
 <div class="container" id="data" data-signed=<%= user_signed_in? %>>
   <div class="parent-center">
+    <div style= "display:flex">
     <h4>Excuse Found!</h4>
-    <p>Reported on  <%=  @creative_excuse.time_format%></p>
-    <%= @creative_excuse.icon %>
-    <br>
-    <h6> <%= @creative_excuse.title %></h6>
-    <p><%= @creative_excuse.description %><p>
-    <% if !@saved_excuse.id %>
+    <% unless @saved_excuse.id  %>
+
       <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
-        <button class="submit" style="border: none">
-          <i class="far fa-heart fa-3x" ></i>
+        <button class="submit" style="border: none; background: none">
+          <i class="far fa-heart fa-2x" style = "margin-left: 19px; align-items: center; color:#575757" ></i>
         </button>
       <% end %>
     <% else %>
-        <i class="fas fa-heart fa-3x" style="color: red"></i>
+        <i class="fas fa-heart fa-2x" style=" color: #FFBA34; margin-left: 20px; align-items: center;"></i>
     <% end %>
+  </div>
+    <p>Reported on  <%=  @creative_excuse.time_format%></p>
+    <span style= "color: #575757"><%= @creative_excuse.icon %></span>
+    <br>
+    <h6> <%= @creative_excuse.title %></h6>
+    <p><%= @creative_excuse.description %><p>
+
 
     <div class="width-100">
       <%= link_to "Give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-3 width-100"  %>
