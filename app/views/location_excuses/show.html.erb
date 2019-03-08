@@ -18,33 +18,6 @@
   <% if !@next_excuse.nil? %>
     <%= link_to "Need another excuse?", location_excuse_path(@next_excuse), class: "link" %>
     <% else %>
-    <%= link_to "No more excuses found for your journey - try a creative excuse", creative_excuse_path(), class: "link" %>
+    <%= link_to "No more excuses found for your journey - try a creative excuse", creative_excuse_path(1), class: "link" %>
   <% end %>
   </div>
-<div style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;" class="parent-center">
-    <% unless @location_excuse.journeys.empty? %>
-      <p><%= @location_excuse.journeys %></p>
-    <% end %>
-    <% @coordinates = [] %>
-    <% @location_excuse.journey_route.each do |leg|%>
-    <% unless leg.class == Array %>
-      <% leg = JSON.parse(leg) %>
-    <% end %>
-
-      <% leg.each do |coords| %>
-        <% @coordinates << [coords[1], coords[0]] %>
-      <% end %>
-    <% end %>
-    <div id="coordinates" style="display: none;" >
-      <%= @coordinates %>
-    </div>
-    <div
-      id="map"
-      style="width: 100%;
-      height: 600px;"
-      data-markers="<%= @markers.to_json %>"
-      data-mapboxApiKey="<%= ENV['MAPBOX_API_KEY'] %>"
-    ></div>
-  </div>
-</div>
-</div>
