@@ -48,7 +48,6 @@ class CreativeExcusesController < ApplicationController
     session[:seen_ids] << @selection.id
     @random_array.delete(@selection)
     return @selection
-    # above line returns @selection
   end
 
   def creative_excuse_params

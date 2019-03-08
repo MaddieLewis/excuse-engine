@@ -19,7 +19,8 @@ const initMapbox = () => {
       container: 'map',
       style: 'mapbox://styles/madz/cjsx5f2m92iu31frv61mfq1ih',
       center: [-0.07711901911, 51.53263963289],
-      zoom: 10
+      zoom: 10,
+      interactive: false
     });
 
     map.on('load', function () {

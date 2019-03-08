@@ -5,9 +5,6 @@ class LocationExcuse < ApplicationRecord
   geocoded_by :end_point
   before_save :geocode_endpoints
 
-  # after_validation :geocode, if: :will_save_change_to_start_point?
-  # after_validation :geocode, if: :will_save_change_to_end_point?
-
   private
 
   def geocode_endpoints
