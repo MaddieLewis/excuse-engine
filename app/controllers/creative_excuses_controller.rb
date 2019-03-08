@@ -6,8 +6,9 @@ class CreativeExcusesController < ApplicationController
     session[:seen_ids] ||= []
     creative_excuses = CreativeExcuse.all
     session[:seen_ids] = [] if session[:seen_ids].count == creative_excuses.count
-    @saved_excuse = SavedExcuse.new
     @creative_excuse = CreativeExcuse.find(params[:id])
+    savex = SavedExcuse.where(excuse_id: @creative_excuse.id).first
+    @saved_excuse = savex ? savex : SavedExcuse.new
     @random_excuse = random_selection
   end
 
@@ -19,7 +20,7 @@ class CreativeExcusesController < ApplicationController
     @creative_excuse = CreativeExcuse.new(creative_excuse_params)
     @creative_excuse.user = current_user
     if @creative_excuse.save
-      redirect_to creative_excuse_url(@creative_excuse), notice: 'Your excuse was saved.'
+      redirect_to creative_excuse_url(@creative_excuse)
     else
       render :new
     end
