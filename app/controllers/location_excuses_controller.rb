@@ -1,6 +1,6 @@
 class LocationExcusesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[new show create details]
-  before_action :set_location_excuse, only: %i[show, details]
+  before_action :set_location_excuse, only: :show
 
   TFL_APP_ID = ENV['TFL_APP_ID']
   TFL_APP_KEY = ENV['TFL_APP_KEY']
@@ -22,15 +22,12 @@ class LocationExcusesController < ApplicationController
     unless all_excuses.empty?
       all_excuses.map do |excuse|
         unless excuse.lines_disrupted.nil? || excuse.disruption_message.nil?
-          unless excuse.save
-            render :new
-          end
+          render :new unless excuse.save
         end
       end
     end
 
     if !all_excuses.first.nil?
-      @location_excuse.destroy
       @location_excuse = all_excuses.first
       redirect_to location_excuse_path(@location_excuse)
     else
@@ -40,9 +37,11 @@ class LocationExcusesController < ApplicationController
 
   def show
     @mode = ""
+    @next_excuse = LocationExcuse&.find(@location_excuse.id + 1)
   end
 
   def details
+    @location_excuse = LocationExcuse.find(params[:location_excuse_id])
     if @location_excuse == LocationExcuse.last
       @next_excuse = nil
     else
@@ -109,6 +108,7 @@ class LocationExcusesController < ApplicationController
   def find_excuses(mode)
     parsed = api_call(mode)
     arr = []
+    return arr if parsed["type"] == "Tfl.Api.Presentation.Entities.JourneyPlanner.DisambiguationResult"
     parsed["lines"].each do |line|
       line["lineStatuses"].each do |line_status|
         hash = {}
