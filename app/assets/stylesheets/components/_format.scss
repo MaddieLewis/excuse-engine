@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.details-page {
+  display: flex;
+  flex-direction: column;
+
 .parent-center2 {
   height: calc(100vh - 100px);
   display: flex;
@@ -19,6 +23,11 @@
 .width-80 {
   width: 80%;
   align: center;
+}
+
+.width-90 {
+  width: 90%;
+  justify-text: justify;
 }
 
 .header {
