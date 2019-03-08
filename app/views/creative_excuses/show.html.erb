@@ -8,8 +8,8 @@
     <p><%= @creative_excuse.description %><p>
     <% if !@saved_excuse.id %>
       <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
-        <button class="submit">
-          <i class="far fa-heart fa-3x"></i>
+        <button class="submit" style="border: none">
+          <i class="far fa-heart fa-3x" ></i>
         </button>
       <% end %>
     <% else %>
