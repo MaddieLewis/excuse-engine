@@ -19,6 +19,6 @@
   <% if !@next_excuse.nil? %>
     <%= link_to "Need another excuse?", location_excuse_path(@next_excuse), class: "link mt-3" %>
     <% else %>
-    <%= link_to "No more excuses found for your journey - try a creative excuse", creative_excuse_path(1), class: "link" %>
+    <%= link_to "Try a creative excuse", root_path, class: "link" %>
   <% end %>
   </div>

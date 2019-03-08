@@ -150,12 +150,12 @@ class LocationExcusesController < ApplicationController
       journ << "#{journey["duration"]}"
       journey["legs"].each_with_index do |leg, index|
         if leg["disruptions"].empty?
-          journ << "leg #{index + 1}: #{leg["instruction"]["summary"]}"
+          journ << "#{leg["instruction"]["summary"]}"
         else
           leg["disruptions"].each do |disruption|
-            if disruption["category"] == "PlannedWork" then journ << "leg #{index + 1}: #{leg["instruction"]["summary"]}"
+            if disruption["category"] == "PlannedWork" then journ << "#{leg["instruction"]["summary"]}"
             else
-              journ << "leg #{index + 1}: #{leg["instruction"]["summary"]}, disruption: #{disruption["description"]}"
+              journ << "#{leg["instruction"]["summary"]}, disruption: #{disruption["description"]}"
             end
           end
         end

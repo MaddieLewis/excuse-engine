@@ -1,6 +1,11 @@
-<div style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 100vh;" class="parent-center">
-    <% unless @location_excuse.journeys.empty? %>
-      <p><%= @location_excuse.journeys %></p>
+<div class="details-page" style="">
+  <% @location_excuse.lines_disrupted.to_i > 0 ? @mode = "bus" : @mode = "line" %>
+    <% @mode = "road" if @location_excuse.journeys  == [] %>
+    <% if @mode == "road" %>
+    <h2 class="mt-3 text-center">There are traffic delays <%= @location_excuse.lines_disrupted %></h2>
+    <% else %>
+    <h2 class="mt-3 text-center"><%= @location_excuse.lines_disrupted %> <%= @mode %></h2>
+    <h2 style="font-size: 21px;"> has disruptions</h2>
     <% end %>
     <% @coordinates = [] %>
     <% @location_excuse.journey_route.each do |leg|%>
@@ -15,13 +20,38 @@
     <div id="coordinates" style="display: none;" >
       <%= @coordinates %>
     </div>
+  </div>
     <div
       id="map"
       style="width: 100%;
-      height: 600px;"
+      height: 300px;"
       data-markers="<%= @markers.to_json %>"
       data-mapboxApiKey="<%= ENV['MAPBOX_API_KEY'] %>"
     ></div>
-  </div>
-</div>
+    <div class="details-page">
+    <div class="mt-3 width-90">
+      <p><%= @location_excuse.disruption_message %><p>
+    </div>
+    <div class="width-90">
+      <p style="color:#FFBA34;">EXCUSE MESSAGE</p>
+      <div class ="width-90 p-3 d-flex justify-content-between" style="color:#575757; background-color:#F4F4F4; " contenteditable="true">
+        I’m sorry, I’m running late this morning.
+        The <%= @location_excuse.lines_disrupted %> <%= @mode %> is disrupted and
+        has affected my route. It will take me <%= @location_excuse.journeys[1] %> minutes to get in.
+        <div style="background-color: #9CF0F5; padding: 6px 8px; padding-bottom: 2px; border-radius: 50%; height: 34px; width: 34px; object-fit: cover;">
+          <i class="far fa-copy" style="font-size: 23px; color: white;"></i>
+        </div>
+      </div>
+    </div>
+    <% unless @location_excuse.journeys.empty? %>
+        <div class="width-90 mt-3">
+          <p style="color:#FFBA34;">DISRUPTED JOURNEY<span style="color:#575757"> - <%= @location_excuse.journeys[1] %> minutes</span></p>
+            <ul>
+            <% @location_excuse.journeys.drop(2).each do  |journey|%>
+              <li style="color:#575757"><%= journey %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+
 </div>
