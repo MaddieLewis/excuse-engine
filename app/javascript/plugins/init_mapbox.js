@@ -43,9 +43,9 @@ const initMapbox = () => {
           "line-cap": "round"
         },
         "paint": {
-          "line-color":   coordinates.length <= 4 ? "#FF0000" : "#FFBA34",
-          "line-width":  coordinates.length <= 4 ? 15 : 4,
-          "line-opacity": coordinates.length <=4 ? .6 : .8
+          "line-color":   coordinates.length <= 10 ? "#FF0000" : "#FFBA34",
+          "line-width":  coordinates.length <= 10 ? 15 : 4,
+          "line-opacity": coordinates.length <= 10 ? .6 : .8
         }
       });
     });
