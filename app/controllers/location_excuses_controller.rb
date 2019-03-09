@@ -61,7 +61,6 @@ class LocationExcusesController < ApplicationController
   end
 
   def api_call(mode)
-
     start = "#{@location_excuse.start_latitude}%2C#{@location_excuse.start_longitude}"
     end_pt = "#{@location_excuse.end_latitude}%2C#{@location_excuse.end_longitude}"
     response = HTTP.get("https://api.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?&mode=#{mode}&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}")
@@ -71,8 +70,7 @@ class LocationExcusesController < ApplicationController
   def tra_api_call
     user_start_point = "#{@location_excuse.start_latitude},#{@location_excuse.start_longitude}"
     user_end_point = "#{@location_excuse.end_latitude},#{@location_excuse.end_longitude}"
-    url = "https://traffic.api.here.com/traffic/6.3/incidents.json?app_id=#{TRA_APP_ID}&app_code=#{TRA_APP_CODE}&bbox=#{user_start_point};#{user_end_point}"
-    response = HTTP.get("https://traffic.api.here.com/traffic/6.3/incidents.json?app_id=#{TRA_APP_ID}&app_code=#{TRA_APP_CODE}&bbox=#{user_start_point};#{user_end_point}")
+    response = HTTP.get("https://traffic.api.here.com/traffic/6.3/incidents.json?app_id=#{TRA_APP_ID}&app_code=#{TRA_APP_CODE}&bbox=#{user_start_point};#{user_end_point}&maxresults=5&sort=criticalitydesc")
     JSON.parse(response)
   end
 
@@ -82,34 +80,38 @@ class LocationExcusesController < ApplicationController
 
     arr = []
     traffic_items = parsed["TRAFFIC_ITEMS"]["TRAFFIC_ITEM"]
-    traffic = traffic_items.select do |traffic_item|
-      criticality = traffic_item['CRITICALITY']['DESCRIPTION']
-      criticality == "critical" || criticality == "major"
-    end
-    traffic.first(5).each do |traffic_item|
-      hash = {}
+
+    traffic_items.each do |traffic_item|
       e_area = traffic_item['TRAFFIC_ITEM_DESCRIPTION'][0]['value'].split(' - ').first
       e_area == "Past " ? e_area = traffic_item['LOCATION']['INTERSECTION']['ORIGIN']['STREET1']['ADDRESS1'] : e_area
       e_comments = traffic_item['TRAFFIC_ITEM_DESCRIPTION'][0]['value'].split(' - ').last
+      geo = traffic_item['LOCATION']['GEOLOC']
       e_start_date = traffic_item['START_TIME']
-      r_origin_lat = traffic_item['LOCATION']['GEOLOC']['ORIGIN']['LATITUDE']
-      r_origin_long = traffic_item['LOCATION']['GEOLOC']['ORIGIN']['LONGITUDE']
-      r_to_lat = traffic_item['LOCATION']['GEOLOC']['TO'][0]['LATITUDE']
-      r_to_long = traffic_item['LOCATION']['GEOLOC']['TO'][0]['LONGITUDE']
+      r_origin_lat = geo['ORIGIN']['LATITUDE']
+      r_origin_long = geo['ORIGIN']['LONGITUDE']
+      r_to_lat = geo['TO'][0]['LATITUDE']
+      r_to_long = geo['TO'][0]['LONGITUDE']
+      c_array = []
       e_message = "Traffic Alert!\n#{e_area}\nReason: #{e_comments}\nReported at: #{e_start_date}"
-      hash["line"] = "#{e_area}"
-      hash["message"] = "#{e_message}"
-      hash["journey"] = []
-      hash["journey route"] = [[r_origin_lat,r_origin_long],[r_to_lat,r_to_long]]
+      if geo['GEOMETRY'].nil?
+        c_array << [[r_origin_lat, r_origin_long], [r_to_lat, r_to_long]]
+      else
+        geo['GEOMETRY']['SHAPES']['SHP'].each do |line|
+          all = line['value'].split(' ').map { |e| e.split(',') }
+          c_array << all.uniq
+        end
+      end
+      hash = { "line" => "#{e_area}", "message" => "#{e_message}", "journey" => [], "journey route" => c_array.flatten(1) }
       arr << hash
     end
-    arr
+    arr.uniq
   end
 
   def find_excuses(mode)
     parsed = api_call(mode)
     arr = []
-    return arr if parsed["type"] == "Tfl.Api.Presentation.Entities.JourneyPlanner.DisambiguationResult"
+    return arr if parsed["type"] == "Tfl.Api.Presentation.Entities.JourneyPlanner.DisambiguationResult" || parsed["lines"].nil?
+
     parsed["lines"].each do |line|
       line["lineStatuses"].each do |line_status|
         hash = {}
