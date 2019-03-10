@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :location_excuses, only: [:show, :new, :create] do
     get "/details", to: "location_excuses#details"
+    get "/gmaps", to: "location_excuses#gmaps"
     resources :saved_excuses, only: [:new, :create]
   end
   resources :saved_excuses, only: [:index, :destroy]

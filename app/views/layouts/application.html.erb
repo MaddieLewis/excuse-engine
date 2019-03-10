@@ -28,13 +28,15 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
+    <%= yield(:head_tags) %>
   </head>
   <body">
     <%= render 'layouts/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>
     <%= javascript_include_tag 'application' %>
+     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=#{ENV['GM_API_KEY']}" %>
     <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag "map" %>
   </body>
 </html>

@@ -15,7 +15,7 @@
     <h2 class="mt-3 text-center">The <%= @location_excuse.lines_disrupted %> <%= @mode %> has disruptions</h2>
     <% end %>
     <p class="mt-3 text-center"><%= @location_excuse.disruption_message %></p>
-    <%= link_to "MORE DETAILS", location_excuse_details_path(@location_excuse), class: "btn" %>
+    <%= link_to "MORE DETAILS", location_excuse_gmaps_path(@location_excuse), class: "btn" %>
   <% if !@next_excuse.nil? %>
     <%= link_to "Need another excuse?", location_excuse_path(@next_excuse), class: "link mt-3" %>
     <% else %>
