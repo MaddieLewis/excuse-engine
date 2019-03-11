@@ -27,6 +27,7 @@
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%= yield(:head_tags) %>
 
   </head>
   <body">
@@ -34,6 +35,8 @@
     <%= render 'shared/flashes' %>
     <%= yield %>
     <%= javascript_include_tag 'application' %>
+     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=#{ENV['GM_API_KEY']}" %>
     <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag "map" %>
   </body>
 </html>

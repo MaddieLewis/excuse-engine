@@ -1,24 +1,22 @@
 <div class="parent-center container" style="background-image: url('<%= asset_url 'bgnodog.png' %>'); background-position: bottom; background-size: cover; width: 100vw; height: 92.25vh;justify-content: center;">
     <h5 class="text-center mb-5">excuse found</h5>
-    <% @location_excuse.lines_disrupted.to_i > 0 ? @mode = "bus" : @mode = "line" %>
-    <% @mode = "road" if @location_excuse.journeys  == [] %>
-    <% if  @mode == "bus" %>
+    <% if  @location_excuse.transport_mode == "bus" %>
       <i class="fas fa-bus"></i>
-    <% elsif @mode == "road" %>
+    <% elsif @location_excuse.transport_mode == "road" %>
       <i class="fas fa-road"></i>
-    <% elsif @mode == "line" %>
+    <% elsif @location_excuse.transport_mode == "tube" %>
       <i class="fas fa-subway"></i>
     <% end %>
-    <% if @mode == "road" %>
+    <% if @location_excuse.transport_mode == "road" %>
     <h2 class="mt-3 text-center">There are traffic delays <%= @location_excuse.lines_disrupted %></h2>
     <% else %>
-    <h2 class="mt-3 text-center">The <%= @location_excuse.lines_disrupted %> <%= @mode %> has disruptions</h2>
+    <h2 class="mt-3 text-center">The <%= @location_excuse.lines_disrupted %> <%= @location_excuse.transport_mode %> has disruptions</h2>
     <% end %>
     <p class="mt-3 text-center"><%= @location_excuse.disruption_message %></p>
     <%= link_to "MORE DETAILS", location_excuse_details_path(@location_excuse), class: "btn" %>
-  <% if !@next_excuse.nil? %>
-    <%= link_to "Need another excuse?", location_excuse_path(@next_excuse), class: "link mt-3" %>
+  <% if @location_excuse.id != @last_excuse.id %>
+    <%= link_to "Need another excuse?", location_excuse_path(LocationExcuse.find(@location_excuse.id + 1)), class: "link mt-3" %>
     <% else %>
-    <%= link_to "Try a creative excuse", root_path, class: "link" %>
+    <%= link_to "Try a creative excuse", root_path, class: "link mt-3" %>
   <% end %>
   </div>
