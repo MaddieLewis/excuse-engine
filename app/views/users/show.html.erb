@@ -30,7 +30,10 @@
       <% @user.creative_excuses.each do |created_excuse|  %>
         <span style="color: #FFBA34" class="mr-2"><%= created_excuse.time_format %></span>
         <br>
-        <p><%= created_excuse.title %></p>
+        <p><%= link_to created_excuse.title, creative_excuse_path(created_excuse) %></p>
+
+
+
       <% end %>
     </div>
   </div>
