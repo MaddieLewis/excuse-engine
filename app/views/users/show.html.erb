@@ -19,8 +19,7 @@
       <% @user.saved_excuses.each do |saved_excuse|  %>
         <% if saved_excuse.excuse_type == "CreativeExcuse" %>
           <p><%= saved_excuse.excuse.title %>
-          <p><%= link_to '<i class="fas fa-trash-alt"></i>',  saved_excuse,  method: :delete, data: { confirm: 'Are you sure?' } %></p>
-
+          <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  saved_excuse,  method: :delete, data: { confirm: 'Are you sure?' } %>
 
         <% else %>
           <p><%= "Say something different" %></p>
