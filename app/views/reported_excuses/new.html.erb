@@ -6,7 +6,7 @@
         <%= f.input :title %>
         <%= f.input :description, as: :text %>
         <%= f.input :address %>
-        <%= f.input :category, collection: ["Select Category","malfunction","pets","health","family", "funny","other"] %>
+        <%= f.input :category, collection: ["Select Category","accident","traffic","construction","police", "hazard", "closure", "event"] %>
         <%= f.button :submit, "REPORT EXCUSE", class: "btn btn-wide" %>
       <% end %>
     </div>
