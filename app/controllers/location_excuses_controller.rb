@@ -180,7 +180,7 @@ class LocationExcusesController < ApplicationController
         if !line_status["lineId"].nil?
           hash["line"] = line_status["lineId"]
           hash["message"] = line_status["reason"]
-          if line_status["lineId"] =~ /^([A-Z]|\d)\d*$/
+          if /([A-Z]|\d)\d*/.match?(line_status["lineId"])
             hash["transport_mode"] = 'bus'
           else
             hash["transport_mode"] = 'tube'
