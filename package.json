@@ -7,6 +7,7 @@
     "gmaps": "^0.4.24",
     "jquery": "^3.3.1",
     "mapbox-gl": "^0.53.1",
+    "pagepiling.js": "^1.5.6",
     "places.js": "^1.16.1",
     "popper.js": "^1.14.7",
     "typewriter-effect": "^2.5.2"

@@ -4605,6 +4605,11 @@ p-try@^1.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-1.0.0.tgz#cbc79cdbaf8fd4228e13f621f2b1a237c1b207b3"
   integrity sha1-y8ec26+P1CKOE/Yh8rGiN8GyB7M=
 
+pagepiling.js@^1.5.6:
+  version "1.5.6"
+  resolved "https://registry.yarnpkg.com/pagepiling.js/-/pagepiling.js-1.5.6.tgz#70744a6eab291de29c22c8b58e017ed9032e3abe"
+  integrity sha512-FhiVFGrIOJ135YSDbfPamH+Llz9imQ0Z1K1lUxPiZHziXtOXgx74Jr44a+7IrSuqQxp1IYDhQoMN2pKmpG1kMQ==
+
 pako@~1.0.5:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"

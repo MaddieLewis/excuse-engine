@@ -1,7 +1,6 @@
 require 'HTTP'
 
-
-GM_API_KEY = "AIzaSyDCc44wmX-lku6cA0oDPWKWSf6pGfq2TaY"
+GM_API_KEY = ENV['GM_API_KEY']
 
 origin = "51.518432,-0.126274"
 destination = "51.495354,-0.096062"
