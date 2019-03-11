@@ -5,10 +5,10 @@ import 'mapbox-gl/dist/mapbox-gl.css'; // <-- you need to uncomment the styleshe
 
 import { autocomplete } from '../plugins/init_autocomplete';
 import { initLoader } from '../plugins/init_loader';
-
+import { initTypewriter } from '../plugins/init_typewriter';
 
 autocomplete();
 initLoader();
-
+initTypewriter();
 // initMapbox();
 // import "../views/creative_excuses/show.js.erb";
