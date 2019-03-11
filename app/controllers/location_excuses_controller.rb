@@ -221,12 +221,12 @@ class LocationExcusesController < ApplicationController
       journ << "#{journey["duration"]}"
       journey["legs"].each_with_index do |leg, index|
         if leg["disruptions"].empty?
-          journ << leg["instruction"]["summary"].delete('\\n').to_s
+          journ << leg["instruction"]["summary"].gsub(/[\n]/, '').to_s
         else
           leg["disruptions"].each do |disruption|
-            if disruption["category"] == "PlannedWork" then journ << leg["instruction"]["summary"].delete('\\n').to_s
+            if disruption["category"] == "PlannedWork" then journ << leg["instruction"]["summary"].gsub(/[\n]/, '').to_s
             else
-              journ << "#{leg["instruction"]["summary"].delete('\\n')}, disruption: #{disruption["description"].delete('\\n')}"
+              journ << "#{leg["instruction"]["summary"].gsub(/[\n]/, '')}, disruption: #{disruption["description"].gsub(/[\n]/, '')}"
             end
           end
         end
