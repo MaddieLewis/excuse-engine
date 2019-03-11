@@ -1,4 +1,5 @@
 import GMaps from 'gmaps/gmaps.js';
+
 let coords = [];
 let coordinates = document.getElementById('coordinates');
 if (coordinates) {
@@ -28,7 +29,7 @@ if (mapElement) { // don't try to build a map if there's no div#map to inject in
   } else {
     map.fitLatLngBounds(markers);
   }
-  console.log(markers);
+
   map.drawPolyline ({
       path: coords,
       geodesic: true,
@@ -47,7 +48,7 @@ if (mapElement) { // don't try to build a map if there's no div#map to inject in
         strokeOpacity: 1.0,
         strokeWeight: 2
       });
-    })
+    });
   }
 
 
@@ -61,6 +62,15 @@ if (mapElement) { // don't try to build a map if there's no div#map to inject in
     } else {
     map.addLayer('traffic');
   }
-  })
+  });
+
+  const transit = document.getElementById('transit');
+  transit.addEventListener("click", (event) => {
+    if (map.singleLayers.transit) {
+      map.removeLayer('transit');
+    } else {
+    map.addLayer('transit');
+  }
+  });
 };
 

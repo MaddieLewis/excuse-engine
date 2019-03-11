@@ -17,10 +17,10 @@ class LocationExcusesController < ApplicationController
     traffic = find_tra_excuses
     tfl = find_excuses('') + find_excuses('bus') + find_excuses('bus,tube')
     tfl.reject! { |excuse| excuse == {} }
-    gmaps = find_gmaps.map { |excuse| new_loop(excuse) }
+    # gmaps = find_gmaps.map { |excuse| new_loop(excuse) }
     traffic_excuses = traffic.map { |excuse| new_loop(excuse) }
     tfl_excuses = tfl.uniq.map { |excuse| new_loop(excuse) }
-    all_excuses = gmaps + tfl_excuses + traffic_excuses
+    all_excuses = tfl_excuses + traffic_excuses
     unless all_excuses.empty?
       all_excuses.map do |excuse|
         unless excuse.lines_disrupted.nil? || excuse.disruption_message.nil?
@@ -38,8 +38,7 @@ class LocationExcusesController < ApplicationController
   end
 
   def show
-    @mode = ""
-    @next_excuse = LocationExcuse&.find(@location_excuse.id + 1)
+    @last_excuse = LocationExcuse.last
   end
 
   def details
@@ -49,6 +48,18 @@ class LocationExcusesController < ApplicationController
     else
       @next_excuse = LocationExcuse.find(@location_excuse.id + 1)
     end
+    @markers = [
+      {
+        lat: @location_excuse.start_latitude,
+        lng: @location_excuse.start_longitude,
+        infoWindow: { content: render_to_string(partial: "/location_excuses/map_box", locals: { location_excuse: @location_excuse }) }
+      },
+      {
+        lat: @location_excuse.end_latitude,
+        lng: @location_excuse.end_longitude,
+        infoWindow: { content: render_to_string(partial: "/location_excuses/map_box", locals: { location_excuse: @location_excuse }) }
+      }
+    ]
   end
 
   def gmaps
@@ -152,7 +163,7 @@ class LocationExcusesController < ApplicationController
           c_array << all.uniq
         end
       end
-      hash = { "line" => "#{e_area}", "message" => "#{e_message}", "journey" => [], "journey route" => c_array.flatten(1) }
+      hash = { "line" => "#{e_area}", "message" => "#{e_message}", "journey" => [], "journey route" => c_array.flatten(1), "transport_mode" => "road" }
       arr << hash
     end
     arr.uniq
@@ -169,11 +180,16 @@ class LocationExcusesController < ApplicationController
         if !line_status["lineId"].nil?
           hash["line"] = line_status["lineId"]
           hash["message"] = line_status["reason"]
+          if line_status["lineId"] =~ /^([A-Z]|\d)\d*$/
+            hash["transport_mode"] = 'bus'
+          else
+            hash["transport_mode"] = 'tube'
+          end
           all_journeys = find_all_journeys(mode)
           all_journeys.detect do |journey|
-            if journey.join.downcase.include?(line_status["lineId"])
+            if journey.join.downcase.include?(line_status["lineId"].downcase.gsub(/-/, ' '))
               hash["journey"] = journey.uniq
-              hash["journey route"] = find_journey_route(mode, journey.uniq)
+              hash["journey route"] = find_journey_route(mode, journey)
             end
           end
         end
@@ -205,12 +221,12 @@ class LocationExcusesController < ApplicationController
       journ << "#{journey["duration"]}"
       journey["legs"].each_with_index do |leg, index|
         if leg["disruptions"].empty?
-          journ << "#{leg["instruction"]["summary"]}"
+          journ << leg["instruction"]["summary"].delete('\\n').to_s
         else
           leg["disruptions"].each do |disruption|
-            if disruption["category"] == "PlannedWork" then journ << "#{leg["instruction"]["summary"]}"
+            if disruption["category"] == "PlannedWork" then journ << leg["instruction"]["summary"].delete('\\n').to_s
             else
-              journ << "#{leg["instruction"]["summary"]}, disruption: #{disruption["description"]}"
+              journ << "#{leg["instruction"]["summary"].delete('\\n')}, disruption: #{disruption["description"].delete('\\n')}"
             end
           end
         end
@@ -224,7 +240,7 @@ class LocationExcusesController < ApplicationController
     start = @location_excuse.start_point
     end_pt = @location_excuse.end_point
     unless excuse.nil? || excuse.empty?
-      LocationExcuse.new(start_point: start, end_point: end_pt, lines_disrupted: excuse["line"], disruption_message: excuse["message"], journeys: excuse["journey"], journey_route: excuse["journey route"])
+      LocationExcuse.new(start_point: start, end_point: end_pt, lines_disrupted: excuse["line"], disruption_message: excuse["message"], journeys: excuse["journey"], journey_route: excuse["journey route"], transport_mode: excuse["transport_mode"])
     end
   end
 end
