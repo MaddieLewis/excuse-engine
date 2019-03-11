@@ -1,8 +1,5 @@
-
-console.log("help");
 const saved = () =>{
   $("button").click(function() {
-    console.log("helpme")
     $(this).find("i").removeClass("far fa-heart").addClass("fas fa-heart");
   });
 
