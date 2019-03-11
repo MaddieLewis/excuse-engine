@@ -13,3 +13,15 @@
 .navbar-toggler {
   border: none;
 }
+
+.map-div {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.nav-link {
+  font-size: 16px;
+  i {
+    font-size: 20px;
+  }
+}

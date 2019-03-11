@@ -56,21 +56,26 @@ if (mapElement) { // don't try to build a map if there's no div#map to inject in
   // map.setZoom(14);
 
   const button = document.getElementById('traffic');
-  button.addEventListener("click", (event) => {
-    if (map.singleLayers.traffic) {
-      map.removeLayer('traffic');
-    } else {
-    map.addLayer('traffic');
+  if (button) {
+    button.addEventListener("click", (event) => {
+      if (map.singleLayers.traffic) {
+        map.removeLayer('traffic');
+      } else {
+      map.addLayer('traffic');
+      }
+    });
   }
-  });
 
   const transit = document.getElementById('transit');
-  transit.addEventListener("click", (event) => {
-    if (map.singleLayers.transit) {
-      map.removeLayer('transit');
-    } else {
-    map.addLayer('transit');
+  if (transit) {
+    transit.addEventListener("click", (event) => {
+      if (map.singleLayers.transit) {
+        map.removeLayer('transit');
+      } else {
+      map.addLayer('transit');
+      }
+    });
   }
-  });
+
 };
 
