@@ -3,6 +3,10 @@ class ReportedExcusesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show index]
 
   def show
+    @marker = [{
+      lng: @reported_excuse.longitude,
+      lat: @reported_excuse.latitude
+    }]
   end
 
   def index
