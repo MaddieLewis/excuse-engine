@@ -18,7 +18,9 @@
       <h6 class="mt-100 mb-3">Favorite Excuses</h6>
       <% @user.saved_excuses.each do |saved_excuse|  %>
         <% if saved_excuse.excuse_type == "CreativeExcuse" %>
-          <p><%= saved_excuse.excuse.title %></p>
+          <p><%= saved_excuse.excuse.title %>
+          <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  saved_excuse,  method: :delete, data: { confirm: 'Are you sure?' } %>
+
         <% else %>
           <p><%= "Say something different" %></p>
         <% end %>
@@ -30,7 +32,10 @@
       <% @user.creative_excuses.each do |created_excuse|  %>
         <span style="color: #FFBA34" class="mr-2"><%= created_excuse.time_format %></span>
         <br>
-        <p><%= created_excuse.title %></p>
+        <p><%= link_to created_excuse.title, creative_excuse_path(created_excuse)%></p>
+
+
+
       <% end %>
     </div>
   </div>
