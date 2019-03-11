@@ -19,13 +19,15 @@
       </div>
 
       <div class="section sec-2">
-        <h6>Favorite Excuses</h6>
-        <% @user.saved_excuses.each do |saved_excuse|  %>
-          <% if saved_excuse.excuse_type == "CreativeExcuse" %>
-            <p><%= saved_excuse.excuse.title %></p>
-          <% else %>
-            <p><%= "Say something different" %></p>
-          <% end %>
+      <h6 class="mt-100 mb-3">Favorite Excuses</h6>
+      <% @user.saved_excuses.each do |saved_excuse|  %>
+        <% if saved_excuse.excuse_type == "CreativeExcuse" %>
+          <p><%= link_to saved_excuse.excuse.title, creative_excuse_path(CreativeExcuse.find(saved_excuse.excuse_id)), class: "link" %>
+          <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  saved_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+
+        <% else %>
+          <p><%= "Say something different" %></p>
+
         <% end %>
       </div>
 
@@ -34,10 +36,9 @@
         <% @user.creative_excuses.each do |created_excuse|  %>
           <span style="color: #FFBA34" class="mr-2"><%= created_excuse.time_format %></span>
           <br>
-          <p><%= created_excuse.title %></p>
+          <p><%= link_to created_excuse.title, creative_excuse_path(created_excuse), class: "link"%></p>
         <% end %>
       </div>
-
     </div>
   </div>
 
