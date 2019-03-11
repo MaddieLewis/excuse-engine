@@ -1,6 +1,6 @@
 <div id="pagepiling">
   <div class="section sec-1">
-    <div class="details-page" style="align-items: center; justify-content: center;">
+    <div class="details-page" style="align-items: space-between; justify-content: center;">
       <% @location_excuse.lines_disrupted.to_i > 0 ? @mode = "bus" : @mode = "line" %>
         <% @mode = "road" if @location_excuse.journeys  == [] %>
         <% if @mode == "road" %>
