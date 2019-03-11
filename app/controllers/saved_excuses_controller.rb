@@ -24,7 +24,6 @@ class SavedExcusesController < ApplicationController
   end
 
   def destroy
-    @saved_excuse = SavedExcuse.find(params[:id])
     @saved_excuse.destroy
     redirect_to user_path
   end

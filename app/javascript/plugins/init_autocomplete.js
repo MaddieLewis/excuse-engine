@@ -13,7 +13,7 @@
 
 function autocomplete() {
   document.addEventListener("DOMContentLoaded", function() {
-    var addresses = document.querySelectorAll('#location_excuse_start_point, #location_excuse_end_point');
+    var addresses = document.querySelectorAll('#location_excuse_start_point, #location_excuse_end_point, #reported_excuse_address');
     addresses.forEach (address => {
       if (address) {
         var autocomplete = new google.maps.places.Autocomplete(address, { types: [ 'geocode' ] });

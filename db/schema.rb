@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_103303) do
+ActiveRecord::Schema.define(version: 2019_03_11_161033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,20 @@ ActiveRecord::Schema.define(version: 2019_03_11_103303) do
     t.string "transport_mode"
   end
 
+  create_table "reported_excuses", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "category"
+    t.datetime "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_reported_excuses_on_user_id"
+  end
+
   create_table "saved_excuses", force: :cascade do |t|
     t.bigint "user_id"
     t.text "message"
@@ -69,5 +83,6 @@ ActiveRecord::Schema.define(version: 2019_03_11_103303) do
   end
 
   add_foreign_key "creative_excuses", "users"
+  add_foreign_key "reported_excuses", "users"
   add_foreign_key "saved_excuses", "users"
 end
