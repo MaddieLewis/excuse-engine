@@ -7,10 +7,11 @@ import { pagepiler } from './pagepiler';
 
 import { autocomplete } from '../plugins/init_autocomplete';
 import { initLoader } from '../plugins/init_loader';
+import { initTypewriter } from '../plugins/init_typewriter';
 
-initAutocomplete();
-pagepiler();
 autocomplete();
+initTypewriter();
+pagepiler();
 initLoader();
 
 
