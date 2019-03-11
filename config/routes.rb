@@ -13,5 +13,9 @@ Rails.application.routes.draw do
   end
   resources :saved_excuses, only: [:index, :destroy]
   resources :users, only: :show
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :reported_excuses, only: [:show, :new, :create, :index] do
+    resources :saved_excuses, only: [:new, :create]
+  end
+
 end
