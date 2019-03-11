@@ -100,7 +100,7 @@ class LocationExcusesController < ApplicationController
     start = "#{@location_excuse.start_latitude}%2C#{@location_excuse.start_longitude}"
     end_pt = "#{@location_excuse.end_latitude}%2C#{@location_excuse.end_longitude}"
     response = HTTP.get("https://api.tfl.gov.uk/Journey/JourneyResults/#{start}/to/#{end_pt}?&mode=#{mode}&app_id=#{TFL_APP_ID}&app_key=#{TFL_APP_KEY}")
-    JSON.parse(response)
+    JSON&.parse(response)
   end
 
   def tra_api_call
