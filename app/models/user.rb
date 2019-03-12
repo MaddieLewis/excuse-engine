@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :reported_excuses
   has_many :location_excuses, through: :saved_excuses
   has_many :reported_excuses
+
+  validates :username, presence: true, uniqueness: true
   # after_create :send_welcome_email
 
 def counter
@@ -25,6 +27,7 @@ def level
     4
   elsif counter > 15
     5
+
   end
 end
 

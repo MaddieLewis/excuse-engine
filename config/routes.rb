@@ -21,5 +21,4 @@ Rails.application.routes.draw do
     end
     resources :saved_excuses, only: [:new, :create]
   end
-
 end
