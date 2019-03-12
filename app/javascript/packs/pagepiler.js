@@ -923,7 +923,10 @@ const pagepiler = () =>{
 })(jQuery, document, window);
 
 $(document).ready(function() {
-    $('#pagepiling').pagepiling();
+    $('#pagepiling').pagepiling({
+      normalScrollElements: '#map',
+      normalScrollElementTouchThreshold: 5
+      });
 });
 
 }

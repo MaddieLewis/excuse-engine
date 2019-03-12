@@ -37,6 +37,34 @@ if (mapElement) { // don't try to build a map if there's no div#map to inject in
       strokeOpacity: 1.0,
       strokeWeight: 2
     });
+    map.addControl({
+    position: 'right_center',
+    content: '<i class="fas fa-location-arrow" style="font-size: 21px;"></i>',
+    style: {
+      margin: '10px',
+      padding: '4px 8px',
+      background: '#fff'
+    },
+    events: {
+      click: function(){
+        GMaps.geolocate({
+          success: function(position){
+            map.setCenter(position.coords.latitude, position.coords.longitude);
+            map.addMarker({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+              });
+          },
+          error: function(error){
+            alert('Geolocation failed: ' + error.message);
+          },
+          not_supported: function(){
+            alert("Your browser does not support geolocation");
+          }
+        });
+      }
+    }
+  });
 
   if (pline) {
     pline.forEach(p => {
