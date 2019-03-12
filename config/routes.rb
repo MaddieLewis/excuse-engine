@@ -17,5 +17,4 @@ Rails.application.routes.draw do
   resources :reported_excuses, only: [:show, :new, :create, :index, :update, :edit, :destroy] do
     resources :saved_excuses, only: [:new, :create]
   end
-
 end
