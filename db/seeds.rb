@@ -31,7 +31,7 @@ excuse15 = CreativeExcuse.create!(user: user1, title: 'Azkaban', description: "I
 excuse16 = CreativeExcuse.create!(user: user2, title: 'Rick Astley', description: "I was given up and let down by Mr Astley", category: "life" )
 excuse17 = CreativeExcuse.create!(user: user2, title: 'Parade Issues', description: "I got caught in a parade", category: "travel" )
 
-puts "seeding reports ..."
+# puts "seeding reports ..."
 
 # require "Date"
 # excuse18 = ReportedExcuse.create!(user: user1, title: "In Hounslow", description: "Long delays on train", address: "4 Canning Road", latitude: "51.509865", longitude: "-0.118092", category: "time constraint", time: DateTime.now )
