@@ -59,7 +59,7 @@
         <div class ="p-3 d-flex justify-content-between" style="color:#575757; background-color:#F4F4F4;" contenteditable="true">
           I’m sorry, I’m running late this morning.
           The <%= @location_excuse.lines_disrupted %> <%= @mode %> is disrupted and
-          has affected my route. It will take me <%= @location_excuse.journeys[1] if @location_excuse.journeys %> minutes to get in.
+          has affected my route. It will take me <%= distance_of_time_in_words_to_now(Time.now + @location_excuse.journeys[1].to_i * 60) if @location_excuse.journeys %> to get in.
           <div style="background-color: #9CF0F5; padding: 6px 8px; padding-bottom: 2px; border-radius: 50%; height: 34px; width: 34px; object-fit: cover;" contenteditable="false">
             <i class="far fa-copy" style="font-size: 23px; color: white;"></i>
           </div>
@@ -72,7 +72,7 @@
   <div class="section sec-3">
     <div class="details-page width-90" style="align-items: center; justify-content: center;">
       <div class="width-90 mt-3">
-        <p style="color:#FFBA34;">DISRUPTED JOURNEY<span style="color:#575757"> - <%= @location_excuse.journeys[1] if @location_excuse.journeys%> minutes</span></p>
+        <p style="color:#FFBA34;">DISRUPTED JOURNEY<span style="color:#575757"> - <%= distance_of_time_in_words_to_now(Time.now + @location_excuse.journeys[1].to_i * 60) %></span></p>
           <ul>
           <% @location_excuse.journeys&.drop(2)&.each do  |journey|%>
             <li style="color:#575757"><%= journey %></li>
