@@ -2,11 +2,12 @@
   <div class="width-100 text-center">
 
     <div class="section sec-1">
+      <p><%= @user.icon %></p>
       <h4 class=""><%=  @user.first_name  %> </h4>
       <h4 class="mb-5"><%= @user.last_name  %></h4>
       <h3> Level <%= @user.level.to_s %> </h3>
       <h3 style="color: #9CF0F5">Procrastinator</h3>
-      <h6 class="mt-100 mb-3">Lifetime Statistics</h6>
+      <h6 class="mb-3">Lifetime Statistics</h6>
       <div class="d-flex justify-content-center">
         <h4 style="color: #FFBA34" class="mr-2"><%= @user.saved_excuses.count %></h4>
         <p><%= 'excuse'.pluralize(@user.saved_excuses.count) %> saved</p>
@@ -23,6 +24,7 @@
         <% if saved_excuse.excuse_type == "CreativeExcuse" %>
           <p><%= link_to saved_excuse.excuse.title, creative_excuse_path(CreativeExcuse.find(saved_excuse.excuse_id)), class: "link" %>
           <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  saved_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+          </p>
         <% else %>
           <p><%= "Say something different" %></p>
         <% end %>
@@ -38,8 +40,8 @@
             <%= link_to created_excuse.title, creative_excuse_path(created_excuse),  class: "link"%>
             <%= link_to '<i class="fas fa-edit fa-sm"></i>'.html_safe, edit_creative_excuse_path(created_excuse),  class: "link"%>
             <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  created_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
-          </p>
         <% end %>
+        </p>
     </div>
 
     <div class="section sec-4">
