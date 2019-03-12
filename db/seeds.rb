@@ -5,10 +5,10 @@ SavedExcuse.destroy_all
 User.destroy_all
 
 puts "seeding users ..."
-user1 = User.create!(first_name: "Janie", last_name: "Amero", email: 'janie.amero@gmail.com', password: "janieamero")
-user2 = User.create!(first_name: 'Maddie', last_name: 'Lewis', email: 'maddie@simplywellbeing.com', password: "maddielewis")
-user3 = User.create!(first_name: 'Mark', last_name: 'Gould', email: 'mgould16@gmail.com', password: "mgould16")
-user4 = User.create!(first_name: 'Ally', last_name: 'Campbell', email: 'killeralients@outlook.com', password: "killeraliens")
+user1 = User.create!(first_name: "Janie", last_name: "Amero", username: 'jamero', email: 'janie.amero@gmail.com', password: "janieamero")
+user2 = User.create!(first_name: 'Maddie', last_name: 'Lewis', username: 'mlewis', email: 'maddie@simplywellbeing.com', password: "maddielewis")
+user3 = User.create!(first_name: 'Mark', last_name: 'Gould', username: 'mgould', email: 'mgould16@gmail.com', password: "mgould16")
+user4 = User.create!(first_name: 'Ally', last_name: 'Campbell', username: 'acampbell', email: 'killeralients@outlook.com', password: "killeraliens")
 
 puts "seeding excuses ..."
 
@@ -33,8 +33,8 @@ excuse17 = CreativeExcuse.create!(user: user2, title: 'Parade Issues', descripti
 
 puts "seeding reports ..."
 
-require "Date"
-excuse18 = ReportedExcuse.create!(user: user1, title: "In Hounslow", description: "Long delays on train", address: "4 Canning Road", latitude: "51.509865", longitude: "-0.118092", category: "time constraint", time: DateTime.now )
+# require "Date"
+# excuse18 = ReportedExcuse.create!(user: user1, title: "In Hounslow", description: "Long delays on train", address: "4 Canning Road", latitude: "51.509865", longitude: "-0.118092", category: "time constraint", time: DateTime.now )
 
 # SavedExcuse.create!(user: user2, excuse: excuse1, message: "How funny is this!", rating: 5)
 # SavedExcuse.create!(user: user1, excuse: excuse2, message: "My Daily commute", rating: 5)
