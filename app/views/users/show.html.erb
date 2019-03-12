@@ -25,7 +25,6 @@
           <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  saved_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
         <% else %>
           <p><%= "Say something different" %></p>
-
         <% end %>
       <% end %>
     </div>
@@ -40,8 +39,18 @@
             <%= link_to '<i class="fas fa-edit fa-sm"></i>'.html_safe, edit_creative_excuse_path(created_excuse),  class: "link"%>
             <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  created_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
           </p>
-
         <% end %>
+    </div>
+
+    <div class="section sec-4">
+      <h6 class="mt-10">Reported Excuses</h6>
+      <% @user.reported_excuses.each do |reported_excuse|  %>
+        <p>
+          <%= link_to reported_excuse.title, reported_excuse_path(reported_excuse),  class: "link"%>
+          <%= link_to '<i class="fas fa-edit fa-sm"></i>'.html_safe, edit_reported_excuse_path(reported_excuse),  class: "link"%>
+          <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  reported_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+        </p>
+      <% end %>
     </div>
 
   </div>

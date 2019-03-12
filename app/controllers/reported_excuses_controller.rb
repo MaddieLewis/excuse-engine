@@ -1,5 +1,5 @@
 class ReportedExcusesController < ApplicationController
-  before_action :set_reported_excuse, only: %i[show destroy]
+  before_action :set_reported_excuse, only: %i[show destroy edit update]
   skip_before_action :authenticate_user!, only: %i[show index]
 
   def show
@@ -24,6 +24,17 @@ class ReportedExcusesController < ApplicationController
 
   def new
     @reported_excuse = ReportedExcuse.new
+  end
+
+  def edit
+  end
+
+  def update
+    if @reported_excuse.update(reported_excuse_params)
+      redirect_to user_path
+    else
+      render :edit
+    end
   end
 
   def create

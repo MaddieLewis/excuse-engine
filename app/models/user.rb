@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :saved_excuses
   has_many :creative_excuses
+  has_many :reported_excuses
   has_many :location_excuses, through: :saved_excuses
   # after_create :send_welcome_email
 
