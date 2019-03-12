@@ -19,7 +19,7 @@
     </div>
 
     <div class="section sec-2">
-      <h6 class="mt-10">Favorite Excuses</h6>
+      <h6 class="mt-10">Saved Excuses</h6>
       <% @user.saved_excuses.each do |saved_excuse|  %>
         <% if saved_excuse.excuse_type == "CreativeExcuse" %>
           <p><%= link_to saved_excuse.excuse.title, creative_excuse_path(CreativeExcuse.find(saved_excuse.excuse_id)), class: "link" %>
