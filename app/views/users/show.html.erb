@@ -40,7 +40,6 @@
             <%= link_to created_excuse.title, creative_excuse_path(created_excuse),  class: "link"%>
             <%= link_to '<i class="fas fa-edit fa-sm"></i>'.html_safe, edit_creative_excuse_path(created_excuse),  class: "link"%>
             <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  created_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
-
         </p>
         <% end %>
     </div>
