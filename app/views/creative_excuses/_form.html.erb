@@ -2,9 +2,9 @@
   <h2 class="" style="font-weight: 100">CREATE AN EXCUSE</h1>
   <div class="width-100">
     <%= simple_form_for @creative_excuse do |f| %>
-      <%= f.input :title %>
-      <%= f.input :description, as: :text %>
-      <%= f.input :category, collection: ["Select Category","malfunction","pets","health","family", "funny","other"] %>
+      <%= f.input :title, label: "Why might you be late?" %>
+      <%= f.input :description, as: :text, label: "More details" %>
+      <%= f.input :category, collection: ["malfunction","pets","health","family", "funny","other", "transport"] %>
       <%= f.button :submit, "SAVE EXCUSE", class: "btn btn-wide" %>
     <% end %>
   </div>
