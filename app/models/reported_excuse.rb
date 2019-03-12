@@ -7,6 +7,8 @@ class ReportedExcuse < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
+  acts_as_votable
+
   def icon
     if category == "accident"
       return "<i class='fas fa-car-crash'></i>".html_safe

@@ -53,6 +53,18 @@ class ReportedExcusesController < ApplicationController
     redirect_to user_path
   end
 
+  def upvote
+    @reported_excuse = ReportedExcuse.find(params[:id])
+    @reported_excuse.upvote_by(current_user)
+    redirect_to reported_excuse_path(@reported_excuse)
+  end
+
+  def downvote
+    @reported_excuse = ReportedExcuse.find(params[:id])
+    @reported_excuse.downvote_by(current_user)
+    redirect_to reported_excuse_path(@reported_excuse)
+  end
+
   private
 
   def set_reported_excuse

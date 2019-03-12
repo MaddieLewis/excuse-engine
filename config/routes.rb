@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   resources :saved_excuses, only: [:index, :destroy]
   resources :users, only: :show
 
-  resources :reported_excuses, only: [:show, :new, :create, :index, :update, :edit, :destroy] do
+  resources :reported_excuses do
+    member do
+      put :like, to: "reported_excuses#upvote"
+      put :dislike, to: "reported_excuses#downvote"
+    end
     resources :saved_excuses, only: [:new, :create]
   end
 end
