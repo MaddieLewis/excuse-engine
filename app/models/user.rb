@@ -24,6 +24,20 @@ class User < ApplicationRecord
     end
   end
 
+  def icon
+    if level == 1
+      return "<i class='fas fa-battery-empty'></i>".html_safe
+    elsif level == 2
+      return "<i class='fas fa-battery-quarter'></i>".html_safe
+    elsif level == 3
+      return "<i class='fas fa-battery-half'></i>".html_safe
+    elsif level == 4
+      return "<i class='fas fa-battery-three-quarters'></i>".html_safe
+    elsif level <= 5
+      return "<i class='fas fa-battery-full'></i>".html_safe
+    end
+  end
+
   private
 
   # def send_welcome_email
