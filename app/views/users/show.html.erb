@@ -1,5 +1,6 @@
 <div id= "pagepiling">
   <div class="width-100 text-center">
+
     <div class="section sec-1">
       <h4 class=""><%=  @user.first_name  %> </h4>
       <h4 class="mb-5"><%= @user.last_name  %></h4>
@@ -15,8 +16,9 @@
         <p><%= 'excuse'.pluralize(@user.creative_excuses.count) %> created</p>
       </div>
     </div>
+
     <div class="section sec-2">
-      <h6 class="mt-100 mb-3">Favorite Excuses</h6>
+      <h6 class="mt-10">Favorite Excuses</h6>
       <% @user.saved_excuses.each do |saved_excuse|  %>
         <% if saved_excuse.excuse_type == "CreativeExcuse" %>
           <p><%= link_to saved_excuse.excuse.title, creative_excuse_path(CreativeExcuse.find(saved_excuse.excuse_id)), class: "link" %>
@@ -27,14 +29,16 @@
         <% end %>
       <% end %>
     </div>
-    <div class="section sec-3">
-      <h6>Created Excuses</h6>
-      <% @user.creative_excuses.each do |created_excuse|  %>
-        <span style="color: #FFBA34" class="mr-2"><%= created_excuse.time_format %></span>
-        <br>
-        <p><%= link_to created_excuse.title, creative_excuse_path(created_excuse), class: "link"%></p>
-      <% end %>
+
+    <div class="section sec-3" style="margin-top: -50px;">
+        <h6>Created Excuses</h6>
+        <% @user.creative_excuses.each do |created_excuse|  %>
+          <span style="color: #FFBA34" class="mr-2"><%= created_excuse.time_format %></span>
+          <br>
+          <p><%= link_to created_excuse.title, creative_excuse_path(created_excuse), class: "link"%></p>
+        <% end %>
     </div>
+
   </div>
 </div>
 
