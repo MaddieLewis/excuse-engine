@@ -37,7 +37,7 @@ def icon
     return "<i class='fas fa-battery-half'></i>".html_safe
   elsif level == 4
     return "<i class='fas fa-battery-three-quarters'></i>".html_safe
-  elsif level > 5
+  elsif level >= 5
     return "<i class='fas fa-battery-full'></i>".html_safe
   end
 end
