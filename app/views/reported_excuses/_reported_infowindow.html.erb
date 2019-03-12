@@ -1,1 +1,17 @@
-<h3><%= link_to reported_excuse.title, reported_excuse_path(reported_excuse) %></h3>
+<div class="infowindow-card">
+  <div class="window-contents d-flex justify-content-between">
+    <div class="text">
+      <p><%= reported_excuse.category.upcase %></p>
+      <h5 style="font-size: 24px;"><%= link_to reported_excuse.title, reported_excuse_path(reported_excuse) %></h3>
+    </div>
+    <div class="icon">
+      <h4><%= reported_excuse.icon %></h4>
+    </div>
+  </div>
+
+  <p>Created at <%= reported_excuse.time.strftime("%I:%M%p %m/%d/%Y") %> by <%= reported_excuse.user.first_name %></p>
+
+  <%= link_to "that's good", like_reported_excuse_path(@reported_excuse), method: :put, class="btn btn-success btn-xs" %><span class="text-warning">(20)</span>
+  <%= link_to "that's bad", dislike_reported_excuse_path(@reported_excuse), method: :put, class="btn btn-warning btn-xs" %><span class="text-warning">(20)</span>
+
+</div>

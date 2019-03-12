@@ -1,5 +1,6 @@
 .navbar-lewagon {
   justify-content: space-between;
+  z-index: 100;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -12,11 +13,13 @@
 
 .navbar-toggler {
   border: none;
+  // z-index: 100;
 }
 
 .map-div {
   flex-grow: 1;
   text-align: right;
+
 }
 
 .nav-link {
