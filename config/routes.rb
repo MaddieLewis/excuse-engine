@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get "/pages/no_excuse", to: "pages#no_excuse"
 
-  resources :creative_excuses, only: [:show, :new, :create, :edit, :update] do
+  resources :creative_excuses, only: [:show, :new, :create, :edit, :update, :destroy] do
     resources :saved_excuses, only: [:new, :create]
   end
   resources :location_excuses, only: [:show, :new, :create] do

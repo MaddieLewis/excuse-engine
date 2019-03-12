@@ -37,6 +37,14 @@ class CreativeExcusesController < ApplicationController
     end
   end
 
+  def destroy
+    @creative_excuse = CreativeExcuse.find(params[:id])
+    if @creative_excuse.present?
+      @creative_excuse.destroy
+    end
+    redirect_to user_path
+  end
+
   private
 
   def random_selection
