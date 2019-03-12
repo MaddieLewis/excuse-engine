@@ -20,6 +20,19 @@ const mapElement = document.getElementById('map');
 if (mapElement) { // don't try to build a map if there's no div#map to inject in
   let map = new GMaps({ el: '#map', lat: 0, lng: 0 });
   const markers = JSON.parse(mapElement.dataset.markers);
+  // markers.forEach((marker) => {
+  //   let mmarker = new google.maps.MarkerWithLabel({
+  //     position: new google.maps.LatLng(marker.lat, marker.lng),
+  //     draggable: true,
+  //     raiseOnDrag: true,
+  //     icon: marker.icon,
+  //     map: map,
+  //       labelContent: '<i class="fa fa-send fa-3x" style="color:rgba(153,102,102,0.8);"></i>',
+  //     labelAnchor: new google.maps.Point(marker.lat, marker.lng)
+  //   });
+  // });
+  // // console.log(`markers2: ${markers}`);
+  // console.log(markers[0].constructor.name);
   map.addMarkers(markers);
   if (markers.length === 0) {
     map.setZoom(2);
