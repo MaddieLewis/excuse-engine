@@ -16,6 +16,7 @@ if (pline) {
   pline = JSON.parse(pline.innerHTML);
 };
 
+
 var markers = JSON.parse(mapElement.dataset.markers);
 
 function initMap() {

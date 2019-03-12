@@ -1,12 +1,16 @@
 <div id= "pagepiling">
   <div class="section container parent-center">
     <div class="d-flex flex-column justify-content-center align-items-center">
+      <p><%= @user.icon %></p>
+
       <h4 class=""><%=  @user.first_name  %> </h4>
       <h4 class=""><%= @user.last_name  %></h4>
       <h3> Level <%= @user.level.to_s %> </h3>
       <h3 style="color: #9CF0F5">Procrastinator</h3>
+
       <h6 class="mt-100 mb-3">Lifetime Statistics</h6>
       <div class="d-flex">
+
         <h4 style="color: #FFBA34" class="mr-2"><%= @user.saved_excuses.count %></h4>
         <p><%= 'excuse'.pluralize(@user.saved_excuses.count) %> saved</p>
       </div>
@@ -15,20 +19,23 @@
         <p><%= 'excuse'.pluralize(@user.creative_excuses.count) %> created</p>
       </div>
     </div>
+
   </div>
   <div class="section">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <h6 class="">Favorite Excuses</h6>
+
       <% @user.saved_excuses.each do |saved_excuse|  %>
         <% if saved_excuse.excuse_type == "CreativeExcuse" %>
           <p><%= link_to saved_excuse.excuse.title, creative_excuse_path(CreativeExcuse.find(saved_excuse.excuse_id)), class: "link" %>
           <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  saved_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+          </p>
         <% else %>
           <p><%= "Say something different" %></p>
-
         <% end %>
       <% end %>
     </div>
+
   </div>
   <div class="section pp-scrollable">
     <div class="d-flex flex-column justify-content-center align-items-center">
@@ -38,9 +45,25 @@
         <span style="color: #FFBA34" class="mr-2"><%= created_excuse.time_format %></span>
         <br>
         <p><%= link_to created_excuse.title, creative_excuse_path(created_excuse), class: "link"%></p>
+
+            <%= link_to '<i class="fas fa-edit fa-sm"></i>'.html_safe, edit_creative_excuse_path(created_excuse),  class: "link"%>
+            <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  created_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+        </p>
+        <% end %>
       </div>
+    </div>
+
+    <div class="section">
+      <h6 class="mt-10">Reported Excuses</h6>
+      <% @user.reported_excuses.each do |reported_excuse|  %>
+        <p>
+          <%= link_to reported_excuse.title, reported_excuse_path(reported_excuse),  class: "link"%>
+          <%= link_to '<i class="fas fa-edit fa-sm"></i>'.html_safe, edit_reported_excuse_path(reported_excuse),  class: "link"%>
+          <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  reported_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+        </p>
       <% end %>
     </div>
+
   </div>
 </div>
 

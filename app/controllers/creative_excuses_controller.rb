@@ -31,10 +31,18 @@ class CreativeExcusesController < ApplicationController
 
   def update
     if @creative_excuse.update(creative_excuse_params)
-      redirect_to creative_excuse_path(@creative_excuse)
+      redirect_to user_path
     else
       render :edit
     end
+  end
+
+  def destroy
+    @creative_excuse = CreativeExcuse.find(params[:id])
+    if @creative_excuse.present?
+      @creative_excuse.destroy
+    end
+    redirect_to user_path
   end
 
   private
