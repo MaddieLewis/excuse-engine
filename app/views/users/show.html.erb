@@ -35,8 +35,12 @@
         <%@user.creative_excuses.each do |created_excuse|  %>
           <span style="color: #FFBA34" class="mr-2"><%= created_excuse.time_format %></span>
           <br>
-          <p><%= link_to created_excuse.title, creative_excuse_path(created_excuse),  class: "link"%> <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  created_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %></p></p>
           <p>
+            <%= link_to created_excuse.title, creative_excuse_path(created_excuse),  class: "link"%>
+            <%= link_to '<i class="fas fa-edit fa-sm"></i>'.html_safe, edit_creative_excuse_path(created_excuse),  class: "link"%>
+            <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  created_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+          </p>
+
         <% end %>
     </div>
 
