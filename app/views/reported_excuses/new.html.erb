@@ -3,10 +3,10 @@
     <h2 class="" style="font-weight: 100">REPORT AN EXCUSE</h1>
     <div class="width-100">
       <%= simple_form_for @reported_excuse do |f| %>
-        <%= f.input :title %>
-        <%= f.input :description, as: :text %>
-        <%= f.input :address %>
-        <%= f.input :category, collection: ["Select Category","accident","traffic","construction","police", "hazard", "closure", "event"] %>
+        <%= f.input :title, label: "Why are you late?" %>
+        <%= f.input :description, as: :text, label: "More details" %>
+        <%= f.input :address, label: "Where did this happen?" %>
+        <%= f.input :category, collection: ["accident","traffic","construction","police", "hazard", "closure", "event", "train delays", "bus delays", "other"] %>
         <%= f.button :submit, "REPORT EXCUSE", class: "btn btn-wide" %>
       <% end %>
     </div>

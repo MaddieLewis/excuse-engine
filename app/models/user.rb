@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :saved_excuses
   has_many :creative_excuses
   has_many :location_excuses, through: :saved_excuses
+  has_many :reported_excuses
   # after_create :send_welcome_email
 
   def level
