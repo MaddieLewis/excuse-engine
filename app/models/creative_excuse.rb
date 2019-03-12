@@ -5,12 +5,12 @@ class CreativeExcuse < ApplicationRecord
   validates :category, inclusion: { in: %w(home life travel family funny other) }
 
   def icon
-    if category == "malfunction"
-      return "<i class='fab fa-steam-symbol'></i>".html_safe
-    elsif category == "pets"
-      return "<i class='fas fa-paw'></i>".html_safe
-    elsif category == "health"
-      return "<i class='fas fa-briefcase-medical'></i>".html_safe
+    if category == "home"
+      return "<i class='fas fa-home'></i>".html_safe
+    elsif category == "life"
+      return "<i class='fas fa-life-ring'></i>".html_safe
+    elsif category == "travel"
+      return "<i class='fas fa-plane-departure'></i>".html_safe
     elsif category == "funny"
       return "<i class='far fa-laugh'></i>".html_safe
     elsif category == "family"
@@ -21,6 +21,6 @@ class CreativeExcuse < ApplicationRecord
   end
 
   def time_format
-    self.created_at.strftime("%B %d, %Y")
+    created_at.strftime("%B %d, %Y")
   end
 end
