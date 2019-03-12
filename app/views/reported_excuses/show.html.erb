@@ -22,5 +22,7 @@
       </div>
     </div>
 </div>
+  <%= link_to "that's good", like_reported_excuse_path(@reported_excuse), method: :put, class: "btn btn-success btn-xs" %><span class="text-warning"><%= (@reported_excuse.get_upvotes.size + 405) %></span>
+  <%= link_to "that's bad", dislike_reported_excuse_path(@reported_excuse), method: :put, class: "btn btn-warning btn-xs" %><span class="text-warning"><%= (@reported_excuse.get_downvotes.size + 100) %></span>
 <%= link_to "🔙", reported_excuses_path, class: "link m-3 big" %>
 </div>

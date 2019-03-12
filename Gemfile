@@ -20,6 +20,7 @@ gem "http"
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
 gem 'jquery-rails'
+gem 'acts_as_votable', '~> 0.12.0'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

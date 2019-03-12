@@ -9,4 +9,7 @@
     </div>
   </div>
   <p>Created at <%= reported_excuse.time.strftime("%I:%M%p %m/%d/%Y") %> by <%= reported_excuse.user.first_name %></p>
+
+  <%= link_to "that's good", like_reported_excuse_path(@reported_excuse), method: :put, class="btn btn-success btn-xs" %><span class="text-warning">(20)</span>
+  <%= link_to "that's bad", dislike_reported_excuse_path(@reported_excuse), method: :put, class="btn btn-warning btn-xs" %><span class="text-warning">(20)</span>
 </div>
