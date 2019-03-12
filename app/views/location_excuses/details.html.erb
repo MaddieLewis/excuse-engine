@@ -58,7 +58,7 @@
       <div class="width-90">
         <p style="color:#FFBA34;">EXCUSE MESSAGE</p>
         <div class ="p-3 d-flex justify-content-between" style="color:#575757; background-color:#F4F4F4;" contenteditable="true">
-          I’m sorry, I’m running late this morning.
+          I’m sorry, I’m running late.
           The <%= @location_excuse.lines_disrupted %> <%= @mode %> is disrupted and
           has affected my route. It will take me <%= distance_of_time_in_words_to_now(Time.now + @location_excuse.journeys[1].to_i * 60) if @location_excuse.journeys %> to get in.
           <div style="background-color: #9CF0F5; padding: 6px 8px; padding-bottom: 2px; border-radius: 50%; height: 34px; width: 34px; object-fit: cover;" contenteditable="false">

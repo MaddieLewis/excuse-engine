@@ -1,0 +1,6 @@
+linkDiv = document.getElementById('save-excuse-link');
+if (linkDiv) {
+  linkDiv.innerHTML = `<%= link_to creative_excuse_saved_excuses_path(@creative_excuse), method: :post, remote: true do %>
+                        <i id="heart" class="far fa-heart fa-3x"></i>
+                       <% end %>`;
+}

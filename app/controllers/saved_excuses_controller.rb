@@ -11,21 +11,28 @@ class SavedExcusesController < ApplicationController
 
   def create
     cu = CreativeExcuse.find(params[:creative_excuse_id].to_i)
-    se = SavedExcuse.new(excuse: cu, user: current_user)
-    if se.save
-      redirect_to creative_excuse_path(cu)
-      # respond_to do |format|
-      #   format.html { redirect_to creative_excuse_path(cu) , notice: 'Your excuse was saved.' }
-      #   format.js
-      # end
+    @se = SavedExcuse.new(excuse: cu, user: current_user)
+    if @se.save
+      # redirect_to creative_excuse_path(cu)
+      respond_to do |format|
+        format.html { redirect_to creative_excuse_path(cu) , notice: 'Your excuse was saved.' }
+        format.js
+      end
     else
-      puts "SOMETHING WENT WRONG"
+      respond_to do |format|
+        format.html { render template: 'creative_excuses/show' }
+        format.js
+      end
     end
   end
 
   def destroy
+    @creative_excuse = @saved_excuse.excuse
     @saved_excuse.destroy
-    redirect_to user_path
+    respond_to do |format|
+      format.html { redirect_to user_path }
+      format.js
+    end
   end
 
   private

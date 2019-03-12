@@ -9,15 +9,36 @@
     <p class="text-center"><%= @creative_excuse.description %><p>
     <div class="width-100 d-flex justify-content-around align-items-center">
       <%= link_to "Give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-3"  %>
-    <% if !@saved_excuse.id %>
-      <%= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
-        <button class="submit" style="border: none; background: none; text-align: normal;">
-          <i class="far fa-heart fa-3x"></i>
-        </button>
+      <% saved_excuse = SavedExcuse.find_by(user: current_user, excuse: @creative_excuse) %>
+      <div id="save-excuse-link">
+        <% if saved_excuse %>
+        <%= link_to saved_excuse_path(saved_excuse), method: :delete, remote: true do %>
+          <i id="heart" class="fas fa-heart fa-3x"></i>
+        <% end %>
+      <% else %>
+        <%= link_to creative_excuse_saved_excuses_path(@creative_excuse), method: :post, remote: true do %>
+          <i id="heart" class="far fa-heart fa-3x"></i>
+        <% end %>
       <% end %>
-    <% else %>
-        <i class="fas fa-heart fa-3x" style="color: red; background: none;"></i>
-    <% end %>
+      </div>
+
+    <div id="creative-excuse-instance" style="display: none"><%= @creative_excuse %></div>
+
+    <div id="saving-unsaving" style="display: none;">
+
+    </div>
+
+    <%# if !@saved_excuse.id %>
+      <%#= simple_form_for [@creative_excuse, @saved_excuse] do |f| %>
+        <!-- <button class="submit" style="border: none; background: none; text-align: normal;"> -->
+          <!-- <i class="far fa-heart fa-3x"></i> -->
+        <!-- </button> -->
+      <!-- <%# end %> -->
+    <%# else %>
+        <!-- <i class="fas fa-heart fa-3x" style="color: red; background: none;"></i> -->
+    <%# end %>
+
+
     </div>
   </div>
 </div>
