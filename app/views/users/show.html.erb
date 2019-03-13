@@ -3,13 +3,13 @@
 </div>
 <div id= "pagepiling">
   <div class="section sec-1 container parent-center">
-    <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex flex-column justify-content-center align-items-center viewheight">
       <p><%= @user.icon %></p>
 
       <h4 class=""><%=  @user.first_name  %> </h4>
       <h4 class=""><%= @user.last_name  %></h4>
       <h3> Level <%= @user.level.to_s %> </h3>
-      <h3 style="color: #9CF0F5">Procrastinator</h3>
+      <h3 style="color: #FFBA34">Procrastinator</h3>
 
       <h6 class="mt-100 mb-3">Lifetime Statistics</h6>
       <div class="d-flex">
@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="section pp-scrollable sec-2 hidden">
-    <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex flex-column justify-content-center align-items-center viewheight">
       <h6 class="">Favorite Excuses</h6>
 
       <% @user.saved_excuses.each do |saved_excuse|  %>
@@ -39,21 +39,21 @@
     </div>
   </div>
   <div class="section pp-scrollable sec-3 hidden">
-    <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex flex-column justify-content-center align-items-center viewheight">
       <h6>Created Excuses</h6>
       <% @user.creative_excuses.each do |created_excuse|  %>
       <div class="d-flex justify-content-center align-items-center">
-        <span style="color: #FFBA34" class="mr-2"><%= created_excuse.time_format %>
+        <p style="color: #FFBA34; text-align: center;" class="mr-2"><%= created_excuse.time_format %>
           <%= link_to created_excuse.title, creative_excuse_path(created_excuse) %>
           <%= link_to '<i class="fas fa-edit fa-sm"></i>'.html_safe, edit_creative_excuse_path(created_excuse),  class: "link"%>
-          <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  created_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %></span>
+          <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  created_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %></p>
         </div>
         <% end %>
     </div>
   </div>
 
   <div class="section pp-scrollable sec-4 hidden">
-    <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex flex-column justify-content-center align-items-center viewheight">
     <h6 class="">Reported Excuses</h6>
     <% @user.reported_excuses.each do |reported_excuse|  %>
       <p>
