@@ -7,7 +7,7 @@ User.destroy_all
 puts "seeding users ..."
 user1 = User.create!(first_name: "Janie", last_name: "Amero", username: 'jamero', email: 'janie.amero@gmail.com', password: "janieamero")
 user2 = User.create!(first_name: 'Maddie', last_name: 'Lewis', username: 'mlewis', email: 'maddie@simplywellbeing.com', password: "maddielewis")
-user3 = User.create!(first_name: 'Mark', last_name: 'Gould', username: 'mgould', email: 'mgould16@gmail.com', password: "mgould16")
+user3 = User.create!(first_name: 'Mark', last_name: 'Gould', username: 'mgould', email: 'mark.gould16@gmail.com', password: "mgould16")
 user4 = User.create!(first_name: 'Ally', last_name: 'Campbell', username: 'acampbell', email: 'killeralients@outlook.com', password: "killeraliens")
 
 puts "seeding excuses ..."
