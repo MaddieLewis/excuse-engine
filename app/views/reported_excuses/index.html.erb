@@ -6,3 +6,6 @@
   height: calc(100vh - 100px);"
   data-markers="<%= @markers.to_json %>"
 ></div>
+<div id="report">
+  <%= link_to "Report an Excuse", new_reported_excuse_path, class: "link report-excuse" %>
+</div>

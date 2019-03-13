@@ -34,6 +34,7 @@
     drawPolyline(map);
     initAutocomplete(map);
     addLayerToggle(map);
+    addReportExcuse(map);
     var trafficLayer = new google.maps.TrafficLayer();
     var transitLayer = new google.maps.TransitLayer();
 
@@ -173,6 +174,11 @@
 function addLayerToggle(map) {
   var buttons = document.getElementById('toggle-buttons');
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(buttons);
+};
+
+function addReportExcuse(map) {
+  var add = document.getElementById('report');
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(add);
 };
 
 function initAutocomplete(map) {
