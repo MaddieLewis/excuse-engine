@@ -33,7 +33,9 @@
           <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  saved_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
           </p>
         <% else %>
-          <p><%= "Say something different" %></p>
+          <p><%= link_to saved_excuse.excuse.lines_disrupted, location_excuse_path(LocationExcuse.find(saved_excuse.excuse_id)), class: "link" %>
+          <%= link_to '<i class="fas fa-trash-alt fa-sm"></i>'.html_safe,  saved_excuse,  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+          </p>
         <% end %>
       <% end %>
     </div>

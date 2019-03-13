@@ -60,7 +60,7 @@ class CreativeExcusesController < ApplicationController
   end
 
   def creative_excuse_params
-    params.require(:creative_excuse).permit(:title, :description, :category)
+    params.require(:creative_excuse).permit(:title, :description, :category, :type)
   end
 
   def set_creative_excuse

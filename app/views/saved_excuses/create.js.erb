@@ -1,6 +1,12 @@
 linkDiv = document.getElementById('save-excuse-link');
 if (linkDiv) {
-  linkDiv.innerHTML = `<%= link_to saved_excuse_path(@se), method: :delete, remote: true do %>
-                        <i id="heart" class="fas fa-heart fa-3x" style="color: #FFBA34;"></i>
-                       <% end %>`;
+  <% if params[:location_excuse_id] %>
+    linkDiv.innerHTML = `<%= link_to saved_excuse_path(@se), method: :delete, remote: true do %>
+                          <i id="heart" class="fas fa-heart fa-3x" style="color: #FFBA34;"></i>
+                        <% end %>`;
+  <% else %>
+    linkDiv.innerHTML = `<%= link_to saved_excuse_path(@se), method: :delete, remote: true do %>
+                          <i id="heart" class="fas fa-heart fa-3x" style="color: #FFBA34;"></i>
+                        <% end %>`;
+  <% end %>
 }
