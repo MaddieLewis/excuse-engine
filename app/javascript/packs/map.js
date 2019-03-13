@@ -124,19 +124,22 @@
       var latlngs = []
       for (var i = 0; i < markers.length; i++) {
         var disrupt = markers[i];
-        console.log(markers[i].infoWindow);
         var marker = new google.maps.Marker({
           position: markers[i],
           map: map,
           title: disrupt[0],
           zIndex: disrupt[3],
+          info: new google.maps.InfoWindow({content: markers[i].infoWindow.content })
         });
         var latlng = new google.maps.LatLng(markers[i].lat, markers[i].lng)
-        var infowindow = new google.maps.InfoWindow({content: markers[i].infoWindow.content });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
         latlngs.push(latlng)
+        google.maps.event.addListener(marker, 'click', function() {
+            // this = marker
+            var marker_map = this.getMap();
+            this.info.open(marker_map, this);
+            // this.info.open(marker_map, this);
+            // Note: If you call open() without passing a marker, the InfoWindow will use the position specified upon construction through the InfoWindowOptions object literal.
+        });
       }
 
 
