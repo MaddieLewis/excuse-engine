@@ -10,15 +10,22 @@
     <div class="width-100">
       <% saved_excuse = SavedExcuse.find_by(user: current_user, excuse: @creative_excuse) %>
       <div id="save-excuse-link" style="margin-top: 16px; text-align: center;">
-        <% if saved_excuse %>
-        <%= link_to saved_excuse_path(saved_excuse), method: :delete, remote: true do %>
-          <i id="heart" class="fas fa-heart fa-3x" style="color: #FFBA34;"></i>
-        <% end %>
-      <% else %>
-        <%= link_to creative_excuse_saved_excuses_path(@creative_excuse), method: :post, remote: true do %>
-          <i id="heart" class="far fa-heart fa-3x" style="color: #FFBA34;"></i>
+        <% if current_user.nil? %>
+          <%= link_to user_session_path do %>
+            <i id="heart" class="far fa-heart fa-3x" style="color: #FFBA34;"></i>
+          <% end %>
+        <% else %>
+          <% if saved_excuse %>
+          <%= link_to saved_excuse_path(saved_excuse), method: :delete, remote: true do %>
+            <i id="heart" class="fas fa-heart fa-3x" style="color: #FFBA34;"></i>
+          <% end %>
+        <% else %>
+          <%= link_to creative_excuse_saved_excuses_path(@creative_excuse), method: :post, remote: true do %>
+            <i id="heart" class="far fa-heart fa-3x" style="color: #FFBA34;"></i>
+          <% end %>
         <% end %>
       <% end %>
+
       </div>
       <%= link_to "Give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-5 width-100"  %>
     </div>
