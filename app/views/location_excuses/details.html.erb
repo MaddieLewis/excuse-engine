@@ -46,13 +46,14 @@
         height: 300px;"
         data-markers="<%= @markers.to_json %>"
       ></div>
-
-      <p style="text-align: center;"><span id="traffic" class="link">Traffic Overlay</span><span id="transit" class="link"> - Transit Overlay</span></p>
-        <div class="details-page"  style="align-items: center; justify-content: center;">
-          <div class="mt-3 width-90">
-            <p style="font-size: 12px;"><%= @location_excuse.disruption_message %></p>
-          </div>
+      <div id="toggle-buttons">
+        <span id="traffic" class="map-btn map-btn-first">Traffic Overlay</span><span id="transit" class="map-btn">Transit Overlay</span>
+      </div>
+      <div class="details-page"  style="align-items: center; justify-content: center;">
+        <div class="mt-3 width-90">
+          <p style="font-size: 12px;"><%= @location_excuse.disruption_message %></p>
         </div>
+      </div>
       </div>
     </div>
 
