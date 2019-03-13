@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <div class="section">
+  <div class="section pp-scrollable">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <h6 class="">Favorite Excuses</h6>
 
@@ -35,7 +35,7 @@
       <% end %>
     </div>
   </div>
-  <div class="section">
+  <div class="section pp-scrollable">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <h6>Created Excuses</h6>
       <% @user.creative_excuses.each do |created_excuse|  %>
@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div class="section">
+  <div class="section pp-scrollable">
     <div class="d-flex flex-column justify-content-center align-items-center">
     <h6 class="">Reported Excuses</h6>
     <% @user.reported_excuses.each do |reported_excuse|  %>
