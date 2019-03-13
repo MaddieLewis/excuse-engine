@@ -1,4 +1,4 @@
-<div id="navbar-loader" class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div id="navbar-loader" class="navbar navbar-expand-sm navbar-light navbar-lewagon" style="z-index: 100 !important;">
   <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "logo.png" %>
    <!--  <span id="logo-text">EXCUSE ENGINE</span> -->
@@ -13,7 +13,7 @@
     <span class="navbar-toggler-icon"></span>
     </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent"">
         <ul class="navbar-nav mr-auto" style="text-align: right;">
           <li class="nav-item">
             <%= link_to reported_excuses_path, class:'nav-link' do %>

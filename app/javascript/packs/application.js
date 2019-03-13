@@ -6,6 +6,7 @@ import { initTypewriter } from '../plugins/init_typewriter';
 // import { saved } from './saved';
 
 const initPagepiling = () => {
+  if (document.getElementById('pagepiling')) {
    $(document).ready(function() {
       $('#pagepiling').pagepiling({
         menu: null,
@@ -23,7 +24,7 @@ const initPagepiling = () => {
               'position': 'right',
               'tooltips': ['section1', 'section2', 'section3', 'section4']
           },
-          normalScrollElements: 'map',
+          normalScrollElements: '#map',
           normalScrollElementTouchThreshold: 5,
           touchSensitivity: 5,
           keyboardScrolling: true,
@@ -35,6 +36,7 @@ const initPagepiling = () => {
         afterRender: function(){},
       });
     });
+ }
 };
 
 // pagepiler();

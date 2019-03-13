@@ -1,5 +1,6 @@
+<div style="height: calc(100vh - 60px);">
 <div id="pagepiling">
-  <div class="section">
+  <div class="section pp-scrollable">
     <div class="details-page" style="align-items: space-between; justify-content: center;">
       <% @location_excuse.lines_disrupted.to_i > 0 ? @mode = "bus" : @mode = "line" %>
         <% @mode = "road" if @location_excuse.journeys  == [] %>
@@ -74,7 +75,7 @@
 
   <% unless @location_excuse.journeys&.empty? %>
 
-  <div class="section sec-3">
+  <div class="section pp-scrollable sec-3">
     <%= link_to location_excuse_path(@location_excuse), class: "link m-3 big" do %>
       <i class="fas fa-long-arrow-alt-left" style="font-size: 24px;"></i>
     <% end %>
@@ -90,4 +91,5 @@
     </div>
   </div>
   <% end %>
+</div>
 </div>
