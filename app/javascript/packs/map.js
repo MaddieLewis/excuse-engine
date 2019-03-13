@@ -126,13 +126,18 @@
     var latlngs = []
     for (var i = 0; i < markers.length; i++) {
       var disrupt = markers[i];
+      console.log(markers[i].infoWindow);
       var marker = new google.maps.Marker({
         position: markers[i],
         map: map,
         title: disrupt[0],
-        zIndex: disrupt[3]
+        zIndex: disrupt[3],
       });
       var latlng = new google.maps.LatLng(markers[i].lat, markers[i].lng)
+      var infowindow = new google.maps.InfoWindow({content: markers[i].infoWindow.content });
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
       latlngs.push(latlng)
     }
 
@@ -143,8 +148,6 @@
     }
     if (latlngbounds) {
       map.fitBounds(latlngbounds);
-      console.log(latlngbounds);
-      console.log(map);
     }
   }
   };
