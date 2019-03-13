@@ -3,7 +3,7 @@
 // @import "dashboard";
 // @import "profile";
 // @import "map";
-@import "pagepiling";
+// @import "pagepiling";
 
 
 html, body {
@@ -69,5 +69,9 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
+
+.hidden2{ animation: css 0s 3s forwards !important; }
+
+@keyframes css  { to { visibility: hidden; } }
