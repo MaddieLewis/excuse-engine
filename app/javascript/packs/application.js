@@ -31,7 +31,14 @@ const initPagepiling = () => {
           sectionSelector: '.section',
 
         //events
-        onLeave: function(index, nextIndex, direction){},
+        onLeave: function(index, nextIndex, direction){
+          if (direction === "down") {
+            document.querySelector(`.sec-${index}`).classList.add('hidden2');
+            document.querySelector(`.sec-${nextIndex}`).classList.remove('hidden');
+          } else
+            document.querySelector(`.sec-${index}`).classList.add('hidden');
+            document.querySelector(`.sec-${nextIndex}`).classList.remove('hidden2');
+        },
         afterLoad: function(anchorLink, index){},
         afterRender: function(){},
       });

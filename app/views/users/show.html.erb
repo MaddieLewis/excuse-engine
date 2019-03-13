@@ -1,5 +1,8 @@
+<div class="fixed-background-img">
+  <%= image_tag 'bgnodog.png' %>
+</div>
 <div id= "pagepiling">
-  <div class="section container parent-center">
+  <div class="section sec-1 container parent-center">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <p><%= @user.icon %></p>
 
@@ -20,7 +23,7 @@
       </div>
     </div>
   </div>
-  <div class="section pp-scrollable">
+  <div class="section pp-scrollable sec-2 hidden">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <h6 class="">Favorite Excuses</h6>
 
@@ -35,7 +38,7 @@
       <% end %>
     </div>
   </div>
-  <div class="section pp-scrollable">
+  <div class="section pp-scrollable sec-3 hidden">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <h6>Created Excuses</h6>
       <% @user.creative_excuses.each do |created_excuse|  %>
@@ -49,7 +52,7 @@
     </div>
   </div>
 
-  <div class="section pp-scrollable">
+  <div class="section pp-scrollable sec-4 hidden">
     <div class="d-flex flex-column justify-content-center align-items-center">
     <h6 class="">Reported Excuses</h6>
     <% @user.reported_excuses.each do |reported_excuse|  %>
