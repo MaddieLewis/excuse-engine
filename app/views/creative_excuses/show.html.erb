@@ -16,11 +16,11 @@
           <% end %>
         <% else %>
           <% if saved_excuse %>
-            <%= link_to saved_excuse_path(saved_excuse), method: :delete, remote: true do %>
+            <%= link_to saved_excuse_path(saved_excuse, type: 'creative'), method: :delete, remote: true do %>
               <i id="heart" class="fas fa-heart fa-3x" style="color: #FFBA34;"></i>
             <% end %>
           <% else %>
-            <%= link_to creative_excuse_saved_excuses_path(@creative_excuse), method: :post, remote: true do %>
+            <%= link_to creative_excuse_saved_excuses_path(@creative_excuse, type: 'creative'), method: :post, remote: true do %>
               <i id="heart" class="far fa-heart fa-3x" style="color: #FFBA34;"></i>
             <% end %>
           <% end %>

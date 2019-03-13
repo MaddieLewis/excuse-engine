@@ -19,7 +19,10 @@
     <% else %>
     <%= link_to "Try a creative excuse", root_path, class: "link mt-3" %>
   <% end %>
+
+
   <% saved_excuse = SavedExcuse.find_by(user: current_user, excuse: @location_excuse) %>
+
   <div id="save-excuse-link" style="margin-top: 16px; text-align: center;">
     <% if current_user.nil? %>
       <%= link_to user_session_path do %>
@@ -37,4 +40,6 @@
       <% end %>
     <% end %>
   </div>
+
+
 </div>
