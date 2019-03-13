@@ -18,3 +18,26 @@
     box-shadow: 0 0 10px $blue;
 }
 
+.map-btn {
+  padding: 8px;
+}
+
+.map-btn:hover{
+  color: black !important;
+  cursor: pointer;
+}
+
+.map-btn-first {
+  border-right: 1px solid $gray;
+}
+
+#toggle-buttons {
+  margin-top: 10px !important;
+  background-color: white;
+  border-radius: 4px;
+  color: $gray;
+  margin: 10px;
+  box-shadow: 0 0 1px $gray;
+  font-size: 14px;
+  padding: 8px;
+}

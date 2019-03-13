@@ -1,4 +1,3 @@
-// import GMaps from 'gmaps/gmaps.js';
   let coords = [];
   let coordinates = document.getElementById('coordinates');
   if (coordinates) {
@@ -25,11 +24,7 @@
       mapTypeControl: false,
       gestureHandling: 'cooperative'
     });
-    // markers.forEach(marker => {
-    //   mark = new google.maps.Marker({
-    //     map: map
-    //   });
-    // });
+
     var centerControlDiv = document.createElement('div');
     var centerControl = new CenterControl(centerControlDiv, map);
 
@@ -38,6 +33,7 @@
     setMarkers(map);
     drawPolyline(map);
     initAutocomplete(map);
+    addLayerToggle(map);
     var trafficLayer = new google.maps.TrafficLayer();
     var transitLayer = new google.maps.TransitLayer();
 
@@ -100,57 +96,57 @@
 
   function setMarkers(map) {
     if (mapElement) {
-    var markers = JSON.parse(mapElement.dataset.markers);
-    // Adds markers to the map.
+      var markers = JSON.parse(mapElement.dataset.markers);
+      // Adds markers to the map.
 
-    // Marker sizes are expressed as a Size of X,Y where the origin of the image
-    // (0,0) is located in the top left of the image.
+      // Marker sizes are expressed as a Size of X,Y where the origin of the image
+      // (0,0) is located in the top left of the image.
 
-    // Origins, anchor positions and coordinates of the marker increase in the X
-    // direction to the right and in the Y direction down.
-    // var image = {
-    //   url: "https://i.ibb.co/D98YX9z/maps-and-flags.png",
-    //   // This marker is 20 pixels wide by 32 pixels high.
-    //   size: new google.maps.Size(32, 32),
-    //   // The origin for this image is (0, 0).
-    //   origin: new google.maps.Point(0, 0),
-    //   // The anchor for this image is the base of the flagpole at (0, 32).
-    //   anchor: new google.maps.Point(0, 0)
-    // };
-    // Shapes define the clickable region of the icon. The type defines an HTML
-    // <area> element 'poly' which traces out a polygon as a series of X,Y points.
-    // The final coordinate closes the poly by connecting to the first coordinate.
-    // var shape = {
-    //   coords: [1, 1, 1, 20, 18, 20, 18, 1],
-    //   type: 'poly'
-    // };
-    var latlngs = []
-    for (var i = 0; i < markers.length; i++) {
-      var disrupt = markers[i];
-      console.log(markers[i].infoWindow);
-      var marker = new google.maps.Marker({
-        position: markers[i],
-        map: map,
-        title: disrupt[0],
-        zIndex: disrupt[3],
-      });
-      var latlng = new google.maps.LatLng(markers[i].lat, markers[i].lng)
-      var infowindow = new google.maps.InfoWindow({content: markers[i].infoWindow.content });
-      marker.addListener('click', function() {
-        infowindow.open(map, marker);
-      });
-      latlngs.push(latlng)
+      // Origins, anchor positions and coordinates of the marker increase in the X
+      // direction to the right and in the Y direction down.
+      // var image = {
+      //   url: "https://i.ibb.co/D98YX9z/maps-and-flags.png",
+      //   // This marker is 20 pixels wide by 32 pixels high.
+      //   size: new google.maps.Size(32, 32),
+      //   // The origin for this image is (0, 0).
+      //   origin: new google.maps.Point(0, 0),
+      //   // The anchor for this image is the base of the flagpole at (0, 32).
+      //   anchor: new google.maps.Point(0, 0)
+      // };
+      // Shapes define the clickable region of the icon. The type defines an HTML
+      // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+      // The final coordinate closes the poly by connecting to the first coordinate.
+      // var shape = {
+      //   coords: [1, 1, 1, 20, 18, 20, 18, 1],
+      //   type: 'poly'
+      // };
+      var latlngs = []
+      for (var i = 0; i < markers.length; i++) {
+        var disrupt = markers[i];
+        console.log(markers[i].infoWindow);
+        var marker = new google.maps.Marker({
+          position: markers[i],
+          map: map,
+          title: disrupt[0],
+          zIndex: disrupt[3],
+        });
+        var latlng = new google.maps.LatLng(markers[i].lat, markers[i].lng)
+        var infowindow = new google.maps.InfoWindow({content: markers[i].infoWindow.content });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+        latlngs.push(latlng)
+      }
+
+
+      var latlngbounds = new google.maps.LatLngBounds();
+      for (var i = 0; i < latlngs.length; i++) {
+        latlngbounds.extend(latlngs[i]);
+      }
+      if (latlngbounds) {
+        map.fitBounds(latlngbounds);
+      }
     }
-
-
-    var latlngbounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < latlngs.length; i++) {
-      latlngbounds.extend(latlngs[i]);
-    }
-    if (latlngbounds) {
-      map.fitBounds(latlngbounds);
-    }
-  }
   };
 
   function drawPolyline(map) {
@@ -173,6 +169,11 @@
 
     line.setMap(map);
   }
+
+function addLayerToggle(map) {
+  var buttons = document.getElementById('toggle-buttons');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(buttons);
+};
 
 function initAutocomplete(map) {
 
