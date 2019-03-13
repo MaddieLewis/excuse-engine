@@ -62,21 +62,21 @@ class LocationExcusesController < ApplicationController
     ]
   end
 
-  def gmaps
-    @location_excuse = LocationExcuse.find(params[:location_excuse_id])
-    @markers = [
-      {
-        lat: @location_excuse.start_latitude,
-        lng: @location_excuse.start_longitude,
-        infoWindow: { content: render_to_string(partial: "/location_excuses/map_box", locals: { location_excuse: @location_excuse }) }
-      },
-      {
-        lat: @location_excuse.end_latitude,
-        lng: @location_excuse.end_longitude,
-        infoWindow: { content: render_to_string(partial: "/location_excuses/map_box", locals: { location_excuse: @location_excuse }) }
-      }
-    ]
-  end
+  # def gmaps
+  #   @location_excuse = LocationExcuse.find(params[:location_excuse_id])
+  #   @markers = [
+  #     {
+  #       lat: @location_excuse.start_latitude,
+  #       lng: @location_excuse.start_longitude,
+  #       infoWindow: { content: render_to_string(partial: "/location_excuses/map_box", locals: { location_excuse: @location_excuse }) }
+  #     },
+  #     {
+  #       lat: @location_excuse.end_latitude,
+  #       lng: @location_excuse.end_longitude,
+  #       infoWindow: { content: render_to_string(partial: "/location_excuses/map_box", locals: { location_excuse: @location_excuse }) }
+  #     }
+  #   ]
+  # end
 
   private
 

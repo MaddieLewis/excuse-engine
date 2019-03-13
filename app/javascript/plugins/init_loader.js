@@ -9,7 +9,6 @@ const initLoader=() => {
   // add event listener to button
   if (button) {
     button.addEventListener("click", () => {
-    console.log("hi");
     searchPage.classList.add("hidden");
     loader.classList.remove("hidden");
     navBar.classList.add("hidden");
