@@ -1,0 +1,52 @@
+#pac-input {
+  background-color: #fff;
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 10px;
+  padding: 10px 11px 10px 11px;
+  text-overflow: ellipsis;
+  width: 300px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+#pac-input:focus {
+  outline: none !important;
+    border: none;
+    box-shadow: 0 0 10px $blue;
+}
+
+.map-btn {
+  padding: 8px;
+}
+
+.map-btn:hover{
+  color: black !important;
+  cursor: pointer;
+}
+
+.map-btn-first {
+  border-right: 1px solid $gray;
+}
+
+#toggle-buttons {
+  margin-top: 10px !important;
+  background-color: white;
+  border-radius: 4px;
+  color: $gray;
+  margin: 10px;
+  box-shadow: 0 0 1px $gray;
+  font-size: 14px;
+  padding: 8px;
+}
+
+#report {
+  background-color: white;
+  margin-bottom: 26px;
+  padding: 8px;
+  box-shadow: 0 0 1px $gray;
+  border-radius: 4px;
+  font-size: 16px;
+}

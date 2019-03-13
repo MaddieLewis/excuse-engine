@@ -1,13 +1,11 @@
-<div class="d-flex justify-content-around align-items-center">
-  <h1 style="text-align: center; margin-left: 16px;">Excuse Map</h1>
-  <%= link_to new_reported_excuse_path do  %>
-    <i class="fas fa-plus" style="color: #FFBA34; font-size: 28px;"></i>
-  <% end %>
-</div>
-
+<h1 style="text-align: center;">Excuse Map</h1>
+<input id="pac-input" class="controls form-controls" type="text" placeholder="Search Box">
 <div
   id="map"
   style="width: 100%;
   height: calc(100vh - 100px);"
   data-markers="<%= @markers.to_json %>"
 ></div>
+<div id="report">
+  <%= link_to "Report an Excuse", new_reported_excuse_path, class: "link report-excuse" %>
+</div>
