@@ -12,7 +12,7 @@
     <% else %>
     <h2 class="mt-3 text-center">The <%= @location_excuse.lines_disrupted %> <%= @location_excuse.transport_mode %> has disruptions</h2>
     <% end %>
-    <p class="mt-3 text-center"><%= @location_excuse.disruption_message %></p>
+    <p class="mt-3 text-center"><%= @location_excuse.disruption_message.split(" ").first(30).join(" ") %>...</p>
     <%= link_to "MORE DETAILS", location_excuse_details_path(@location_excuse), class: "btn" %>
   <% if @location_excuse.id != @last_excuse.id %>
     <%= link_to "Need another excuse?", location_excuse_path(LocationExcuse.find(@location_excuse.id + 1)), class: "link mt-3" %>
