@@ -10,8 +10,7 @@
   </div>
 
   <p>Created at <%= reported_excuse.time.strftime("%I:%M%p %m/%d/%Y") %> by <%= reported_excuse.user.first_name %></p>
-
-  <%= link_to "that's good", like_reported_excuse_path(reported_excuse), method: :put, class: "btn btn-success btn-xs" %><span class="text-warning">(20)</span>
-  <%= link_to "that's bad", dislike_reported_excuse_path(reported_excuse), method: :put, class: "btn btn-warning btn-xs" %><span class="text-warning">(20)</span>
-
+ <div class="d-flex align-items-center"><%= link_to '<i class="far fa-thumbs-up" style="font-size: 36px;"></i>'.html_safe, reported_excuse_upvote_path(reported_excuse), method: :put, class: "link mr-2" %><span class="text-warning mr-2"><%= (reported_excuse.votes) %></span>
+    <%= link_to '<i class="far fa-thumbs-down" style="font-size: 36px;"></i>'.html_safe, reported_excuse_downvote_path(reported_excuse), method: :put, class: "link mt-4" %>
+  </div>
 </div>
