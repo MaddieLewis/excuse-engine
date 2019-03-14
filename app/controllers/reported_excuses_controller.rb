@@ -55,14 +55,24 @@ class ReportedExcusesController < ApplicationController
   end
 
   def upvote
-    @reported_excuse = ReportedExcuse.find(params[:id])
-    @reported_excuse.upvote_by(current_user)
+    @reported_excuse = ReportedExcuse.find(params[:reported_excuse_id])
+    if @reported_excuse.votes.nil?
+      @reported_excuse.votes = 1
+    else
+      @reported_excuse.votes += 1
+    end
+    @reported_excuse.update(votes: @reported_excuse.votes)
     redirect_to reported_excuse_path(@reported_excuse)
   end
 
   def downvote
-    @reported_excuse = ReportedExcuse.find(params[:id])
-    @reported_excuse.downvote_by(current_user)
+    @reported_excuse = ReportedExcuse.find(params[:reported_excuse_id])
+    if @reported_excuse.votes.nil?
+      @reported_excuse.votes = -1
+    else
+      @reported_excuse.votes -= 1
+    end
+    @reported_excuse.update(votes: @reported_excuse.votes)
     redirect_to reported_excuse_path(@reported_excuse)
   end
 
