@@ -1,5 +1,6 @@
 import "bootstrap";
 import 'pagepiling.js';
+import { tooltip } from './tooltip'
 import { autocomplete } from '../plugins/init_autocomplete';
 import { initLoader } from '../plugins/init_loader';
 import { initTypewriter } from '../plugins/init_typewriter';
@@ -51,9 +52,9 @@ initPagepiling();
 autocomplete();
 initTypewriter();
 initLoader();
+tooltip();
 
 
-// import "../views/creative_excuses/show.js.erb";
 /*!
  * pagepiling.js 1.5.3
  *
