@@ -31,7 +31,7 @@ class SavedExcusesController < ApplicationController
       if @se.save
         # redirect_to creative_excuse_path(cu)
         respond_to do |format|
-          format.html { redirect_to location_excuse_path(le) , notice: 'Your excuse was saved.' }
+          format.html { redirect_to location_excuse_path(le), notice: 'Your excuse was saved.' }
           format.js
         end
       else

@@ -62,7 +62,11 @@ class ReportedExcusesController < ApplicationController
       @reported_excuse.votes += 1
     end
     @reported_excuse.update(votes: @reported_excuse.votes)
-    redirect_to reported_excuse_path(@reported_excuse)
+    # redirect_to reported_excuse_path(@reported_excuse)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def downvote
@@ -73,7 +77,11 @@ class ReportedExcusesController < ApplicationController
       @reported_excuse.votes -= 1
     end
     @reported_excuse.update(votes: @reported_excuse.votes)
-    redirect_to reported_excuse_path(@reported_excuse)
+    # redirect_to reported_excuse_path(@reported_excuse)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private
