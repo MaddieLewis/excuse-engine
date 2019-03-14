@@ -1,34 +1,43 @@
-<div class="details-page" style="align-items: center; justify-content: center;">
-  <h2><%= @reported_excuse.title %></h2>
-  <div
-    id="map"
-    style="width: 100%;
-    height: 300px;"
-    data-markers="<%= @marker.to_json %>"
-  ></div>
-  <p><span id="traffic" class="link">Traffic Overlay</span><span id="transit" class="link"> - Transit Overlay</span></p>
-  <div class="details-page"  style="align-items: center; justify-content: center;">
+<div class="fixed-background-img">
+  <%= image_tag 'bgnodog.png' %>
+</div>
+<div id="pagepiling">
+  <div class="section sec-1">
+    <div class="details-page" style="align-items: center; justify-content: center;">
+      <h2><%= @reported_excuse.title %></h2>
+      <div
+        id="map"
+        style="width: 100%;
+        height: 300px;"
+        data-markers="<%= @markers.to_json %>"
+      ></div>
+     <div id="toggle-buttons">
+        <span id="traffic" class="map-btn map-btn-first">Traffic Overlay</span><span id="transit" class="map-btn">Transit Overlay</span>
+      </div>
     <div class="mt-3 width-90">
       <p><%= @reported_excuse.description %><p>
     </div>
-    <div class="width-90">
-      <p style="color:#FFBA34;">EXCUSE MESSAGE</p>
-      <div class ="p-3 d-flex justify-content-between" style="color:#575757; background-color:#F4F4F4;" contenteditable="true">
-        I’m sorry, I’m running late.
-        <%= @reported_excuse.description %>. This has affected my route.
-        <div style="background-color: #9CF0F5; padding: 6px 8px; padding-bottom: 2px; border-radius: 50%; height: 34px; width: 34px; object-fit: cover;" contenteditable="false">
-          <i class="far fa-copy" style="font-size: 23px; color: white;"></i>
+    <%= link_to "that's good", like_reported_excuse_path(@reported_excuse), method: :put, class: "btn btn-success btn-xs" %><span class="text-warning"><%= (@reported_excuse.get_upvotes.size) %></span>
+    <%= link_to "that's bad", dislike_reported_excuse_path(@reported_excuse), method: :put, class: "btn btn-warning btn-xs" %><span class="text-warning"><%= (@reported_excuse.get_downvotes.size) %></span>
+    <%= link_to reported_excuses_path, class: "link m-3 big" do %>
+    <i class="fas fa-long-arrow-alt-left" style="font-size: 24px;"></i>
+  <% end %>
+    </div>
+  </div>
+  <div class="section sec-2 hidden">
+    <div class="details-page"  style="align-items: center; justify-content: center;">
+      <div class="width-90">
+        <p style="color:#FFBA34;">EXCUSE MESSAGE</p>
+        <div class ="p-3 d-flex justify-content-between" style="color:#575757; background-color:#F4F4F4;" contenteditable="true">
+          I’m sorry, I’m running late.
+          <%= @reported_excuse.description %>. This has affected my route.
+          <div style="background-color: #9CF0F5; padding: 6px 8px; padding-bottom: 2px; border-radius: 50%; height: 34px; width: 34px; object-fit: cover;" contenteditable="false">
+            <i class="far fa-copy" style="font-size: 23px; color: white;"></i>
+          </div>
         </div>
       </div>
-    </div>
-</div>
+  </div>
+  </div>
 
-  <%= link_to "that's good", like_reported_excuse_path(@reported_excuse), method: :put, class: "btn btn-success btn-xs" %><span class="text-warning"><%= (@reported_excuse.get_upvotes.size) %></span>
-  <%= link_to "that's bad", dislike_reported_excuse_path(@reported_excuse), method: :put, class: "btn btn-warning btn-xs" %><span class="text-warning"><%= (@reported_excuse.get_downvotes.size) %></span>
-
-
-<%= link_to reported_excuses_path, class: "link m-3 big" do %>
-  <i class="fas fa-long-arrow-alt-left" style="font-size: 24px;"></i>
-<% end %>
-
+  </div>
 </div>
