@@ -9,7 +9,10 @@
     <p class="text-center"><%= @creative_excuse.description %><p>
     <div class="width-100">
       <% saved_excuse = SavedExcuse.find_by(user: current_user, excuse: @creative_excuse) %>
-      <div id="save-excuse-link" style="margin-top: 16px; text-align: center;">
+
+      <%= link_to "Give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-3 width-100"  %>
+
+      <div id="save-excuse-link" style="margin-top: 32px; text-align: center;">
         <% if current_user.nil? %>
           <%= link_to user_session_path do %>
             <i id="heart" class="far fa-heart fa-3x" style="color: #FFBA34;"></i>
@@ -27,7 +30,6 @@
         <% end %>
 
       </div>
-      <%= link_to "Give me something else", creative_excuse_path(@random_excuse), class: "btn btn-intro mt-5 width-100"  %>
     </div>
   </div>
 </div>
