@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_123743) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.integer "votes", default: 0
+    t.integer "votes"
     t.index ["user_id"], name: "index_reported_excuses_on_user_id"
   end
 
