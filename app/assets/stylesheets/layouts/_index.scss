@@ -68,6 +68,10 @@ body {
 
 }
 
+#loader {
+  z-index: 200;
+}
+
 .hidden {
   display: none !important;
 }
