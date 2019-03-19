@@ -4,7 +4,7 @@ import { tooltip } from './tooltip'
 import { autocomplete } from '../plugins/init_autocomplete';
 import { initLoader } from '../plugins/init_loader';
 import { initTypewriter } from '../plugins/init_typewriter';
-// import { saved } from './saved';
+var Clipboard = require('clipboard');
 
 const initPagepiling = () => {
   if (document.getElementById('pagepiling')) {
@@ -46,6 +46,11 @@ const initPagepiling = () => {
     });
  }
 };
+const initClipboard = () => {
+  if (document.querySelector("#copy-button")) {
+    new Clipboard('#copy-button');
+  }
+};
 
 // pagepiler();
 initPagepiling();
@@ -53,6 +58,7 @@ autocomplete();
 initTypewriter();
 initLoader();
 tooltip();
+initClipboard();
 
 
 /*!

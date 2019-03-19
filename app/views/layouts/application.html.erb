@@ -46,6 +46,7 @@
     <%= render 'layouts/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
     <%= javascript_include_tag 'application' %>
      <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=#{ENV['GM_API_KEY']}" %>
     <%= javascript_pack_tag "map" %>
